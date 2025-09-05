@@ -1,0 +1,143 @@
+name: Fetch Daily arXiv AI Papers
+
+on:
+  schedule:
+    # Run at 7:00 AM UTC every day (2 AM EST / 3 AM EDT)
+    # This ensures arXiv has updated (they update at midnight EST)
+    - cron: '0 7 * * *'
+  
+  # Allow manual trigger from GitHub Actions tab
+  workflow_dispatch:
+    inputs:
+      date:
+        description: 'Date to fetch papers (YYYY-MM-DD format, leave empty for yesterday)'
+        required: false
+        type: string
+      max_results:
+        description: 'Maximum papers per category'
+        required: false
+        default: '100'
+        type: string
+
+permissions:
+  contents: write
+
+jobs:
+  fetch-papers:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          ref: gh-pages
+          fetch-depth: 0
+      
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          # No external dependencies needed - using built-in libraries only
+      
+      - name: Determine fetch date
+        id: get-date
+        run: |
+          if [ -n "${{ github.event.inputs.date }}" ]; then
+            echo "FETCH_DATE=${{ github.event.inputs.date }}" >> $GITHUB_OUTPUT
+          else
+            # Get yesterday's date
+            echo "FETCH_DATE=$(date -d 'yesterday' '+%Y-%m-%d')" >> $GITHUB_OUTPUT
+          fi
+          echo "Date to fetch: $(date -d 'yesterday' '+%Y-%m-%d')"
+      
+      - name: Fetch arXiv papers
+        run: |
+          cd gh-pages/research/scripts
+          
+          # Run the Python script directly with parameters
+          if [ -n "${{ github.event.inputs.date }}" ]; then
+            # Manual trigger with specific date
+            python3 arxiv_daily_ai.py \
+              --date "${{ github.event.inputs.date }}" \
+              --output-dir "../daily" \
+              --max-results "${{ github.event.inputs.max_results }}" \
+              --format all
+          else
+            # Scheduled run for yesterday
+            python3 arxiv_daily_ai.py \
+              --output-dir "../daily" \
+              --max-results 100 \
+              --format all
+          fi
+      
+      - name: Check for changes
+        id: check-changes
+        run: |
+          git add -A
+          if git diff --staged --quiet; then
+            echo "changes=false" >> $GITHUB_OUTPUT
+            echo "No new papers found"
+          else
+            echo "changes=true" >> $GITHUB_OUTPUT
+            echo "New papers found, preparing to commit"
+          fi
+      
+      - name: Commit and push changes
+        if: steps.check-changes.outputs.changes == 'true'
+        run: |
+          git config --local user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git config --local user.name "github-actions[bot]"
+          
+          # Get the date for commit message
+          DATE="${{ steps.get-date.outputs.FETCH_DATE }}"
+          
+          # Count new files
+          NEW_FILES=$(git diff --staged --name-only | wc -l)
+          
+          git commit -m "📚 Update arXiv AI papers for ${DATE}
+
+          Auto-fetched by GitHub Actions
+          Files updated: ${NEW_FILES}
+          
+          [skip ci]" || echo "No changes to commit"
+          
+          git push origin gh-pages
+      
+      - name: Create summary
+        if: always()
+        run: |
+          echo "## 📊 arXiv Fetch Summary" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          
+          if [ "${{ steps.check-changes.outputs.changes }}" == "true" ]; then
+            echo "✅ **Status:** Successfully fetched and committed papers" >> $GITHUB_STEP_SUMMARY
+          else
+            echo "ℹ️ **Status:** No new papers found for the specified date" >> $GITHUB_STEP_SUMMARY
+          fi
+          
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "**Date fetched:** ${{ steps.get-date.outputs.FETCH_DATE }}" >> $GITHUB_STEP_SUMMARY
+          echo "**Max results per category:** ${{ github.event.inputs.max_results || '100' }}" >> $GITHUB_STEP_SUMMARY
+          
+          # List generated files if any
+          if [ -d "gh-pages/research/daily" ]; then
+            echo "" >> $GITHUB_STEP_SUMMARY
+            echo "### 📁 Generated Files:" >> $GITHUB_STEP_SUMMARY
+            ls -la gh-pages/research/daily/*${{ steps.get-date.outputs.FETCH_DATE }}* 2>/dev/null | tail -n +2 | awk '{print "- `" $9 "`"}' >> $GITHUB_STEP_SUMMARY || echo "No files for this date" >> $GITHUB_STEP_SUMMARY
+          fi
+      
+      - name: Handle errors
+        if: failure()
+        run: |
+          echo "## ❌ Fetch Failed" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "The arXiv paper fetch encountered an error. Please check the logs for details." >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "**Common issues:**" >> $GITHUB_STEP_SUMMARY
+          echo "- arXiv API may be temporarily unavailable" >> $GITHUB_STEP_SUMMARY
+          echo "- Rate limiting (though the script includes delays)" >> $GITHUB_STEP_SUMMARY
+          echo "- Network connectivity issues" >> $GITHUB_STEP_SUMMARY
