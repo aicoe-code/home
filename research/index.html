@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Research - AICOE</title>
+    <link rel="stylesheet" href="../styles.css">
+    <link rel="stylesheet" href="research.css">
+    <style>
+        .research-hero {
+            background: white;
+            border-radius: var(--radius-lg);
+            padding: var(--space-12) var(--space-8);
+            margin-bottom: var(--space-8);
+            text-align: center;
+            border: 1px solid var(--color-border);
+            box-shadow: var(--shadow-sm);
+        }
+        
+        .research-hero h1 {
+            font-size: var(--text-4xl);
+            color: var(--color-foreground);
+            margin-bottom: var(--space-4);
+        }
+        
+        .research-hero p {
+            font-size: var(--text-lg);
+            color: var(--color-muted);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        .filter-section {
+            background: white;
+            border-radius: var(--radius-lg);
+            padding: var(--space-6);
+            margin-bottom: var(--space-6);
+            border: 1px solid var(--color-border);
+            box-shadow: var(--shadow-sm);
+        }
+        
+        .filter-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: var(--space-2);
+        }
+        
+        .filter-tag {
+            padding: var(--space-2) var(--space-3);
+            background: var(--color-background-subtle);
+            border: 1px solid var(--color-border);
+            border-radius: var(--radius-md);
+            font-size: var(--text-sm);
+            color: var(--color-muted);
+            cursor: pointer;
+            transition: all var(--transition-fast);
+        }
+        
+        .filter-tag:hover,
+        .filter-tag.active {
+            background: var(--color-accent);
+            color: white;
+            border-color: var(--color-accent);
+        }
+        
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: var(--space-4);
+            margin-bottom: var(--space-8);
+        }
+        
+        .stat-card {
+            background: white;
+            border-radius: var(--radius-lg);
+            padding: var(--space-6);
+            border: 1px solid var(--color-border);
+            box-shadow: var(--shadow-sm);
+            text-align: center;
+        }
+        
+        .stat-number {
+            font-size: var(--text-3xl);
+            font-weight: var(--font-semibold);
+            color: var(--color-accent);
+            margin-bottom: var(--space-2);
+        }
+        
+        .stat-label {
+            font-size: var(--text-sm);
+            color: var(--color-muted);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <nav class="breadcrumb">
+            <a href="../home.html">Home</a> / 
+            <span>Research</span>
+        </nav>
+        
+        <div class="research-hero">
+            <h1>AICOE Research Library</h1>
+            <p>Curated summaries of cutting-edge AI research papers, analyzed for enterprise implementation and aligned with AICOE mission areas.</p>
+        </div>
+        
+        <div class="stats-grid">
+            <div class="stat-card">
+                <div class="stat-number">1</div>
+                <div class="stat-label">Research Summaries</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">5</div>
+                <div class="stat-label">Technology Areas</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">2</div>
+                <div class="stat-label">Mission Areas</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">2025</div>
+                <div class="stat-label">Latest Year</div>
+            </div>
+        </div>
+        
+        <div class="filter-section">
+            <h3>Filter by Category</h3>
+            <div class="filter-tags">
+                <span class="filter-tag active" onclick="filterResearch('all')">All</span>
+                <span class="filter-tag" onclick="filterResearch('robotic-design')">Robotic Design</span>
+                <span class="filter-tag" onclick="filterResearch('llm-applications')">LLM Applications</span>
+                <span class="filter-tag" onclick="filterResearch('parallel-mechanisms')">Parallel Mechanisms</span>
+                <span class="filter-tag" onclick="filterResearch('design')">Design</span>
+                <span class="filter-tag" onclick="filterResearch('deployment')">Deployment</span>
+            </div>
+        </div>
+        
+        <div class="research-grid" id="research-grid">
+            <!-- INGRID Paper Card -->
+            <a href="2025-09-04-ingrid.html" class="research-card" data-tags="robotic-design llm-applications parallel-mechanisms design deployment">
+                <div class="priority-badge priority-high" style="position: absolute; top: var(--space-4); right: var(--space-4);">
+                    High Priority
+                </div>
+                <h3 class="research-card-title">INGRID: Intelligent Generative Robotic Design Using Large Language Models</h3>
+                <div class="research-card-date">September 4, 2025</div>
+                <p class="research-card-summary">
+                    Framework integrating LLMs with reciprocal screw theory for automated design of parallel robotic mechanisms. Generates novel kinematic configurations not previously documented in literature.
+                </p>
+                <div class="research-card-tags">
+                    <span class="research-card-tag">Robotic Design</span>
+                    <span class="research-card-tag">LLM Applications</span>
+                    <span class="research-card-tag">Technical</span>
+                </div>
+                <div style="margin-top: var(--space-3); display: flex; gap: var(--space-4); font-size: var(--text-sm); color: var(--color-muted);">
+                    <span>📊 Relevance: 4/5</span>
+                    <span>🔬 Impact: 4/5</span>
+                </div>
+            </a>
+            
+            <!-- Placeholder for future papers -->
+            <div class="card" style="display: flex; align-items: center; justify-content: center; min-height: 200px; color: var(--color-muted);">
+                <div style="text-align: center;">
+                    <p style="font-size: var(--text-lg); margin-bottom: var(--space-2);">More research summaries coming soon</p>
+                    <p style="font-size: var(--text-sm);">Check back for updates</p>
+                </div>
+            </div>
+        </div>
+        
+        <footer class="card text-center" style="margin-top: var(--space-8);">
+            <p class="text-muted mb-0">© 2025 AICOE. Research summaries for enterprise AI implementation.</p>
+        </footer>
+    </div>
+    
+    <script>
+        function filterResearch(tag) {
+            const cards = document.querySelectorAll('.research-card');
+            const filterTags = document.querySelectorAll('.filter-tag');
+            
+            // Update active filter
+            filterTags.forEach(ft => {
+                ft.classList.remove('active');
+                if (ft.textContent.toLowerCase().replace(' ', '-') === tag || 
+                    (tag === 'all' && ft.textContent === 'All')) {
+                    ft.classList.add('active');
+                }
+            });
+            
+            // Filter cards
+            cards.forEach(card => {
+                if (tag === 'all') {
+                    card.style.display = 'block';
+                } else {
+                    const cardTags = card.getAttribute('data-tags');
+                    if (cardTags && cardTags.includes(tag)) {
+                        card.style.display = 'block';
+                    } else {
+                        card.style.display = 'none';
+                    }
+                }
+            });
+        }
+    </script>
+</body>
+</html>
