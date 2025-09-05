@@ -118,13 +118,14 @@ class PipelineOrchestrator:
             'generate_rss': gen_config.get('generate_rss', True)
         }
     
-    def run_pipeline(self, date: datetime = None, force: bool = False):
+    def run_pipeline(self, date: datetime = None, force: bool = False, use_local: bool = False):
         """
         Run the complete pipeline
         
         Args:
             date: Date to fetch papers for (default: yesterday)
             force: Force refetch even if papers were already processed
+            use_local: Use local Claude Code processing instead of API
         """
         self.logger.info("=" * 60)
         self.logger.info("Starting AI Paper Processing Pipeline")
@@ -144,8 +145,35 @@ class PipelineOrchestrator:
             # Save raw papers
             raw_file = self.fetcher.save_papers(papers)
             
-            # Step 2: Process papers with Claude AI
-            if self.config['features'].get('ai_processing', True):
+            # Step 2: Process papers with Claude AI or Claude Code
+            if use_local:
+                self.logger.info("Step 2: Preparing for Claude Code processing")
+                
+                # Use local processor
+                from local_processor import LocalClaudeProcessor
+                local_processor = LocalClaudeProcessor(self._get_processor_config())
+                
+                # Limit papers per run
+                max_papers = self.config['processing'].get('max_papers_per_run', 50)
+                papers_to_process = papers[:max_papers]
+                
+                # Prepare prompts
+                prompt_files = local_processor.prepare_prompts(papers_to_process)
+                self.logger.info(f"Created {len(prompt_files)} prompts for Claude Code")
+                
+                print("\n" + "="*60)
+                print("📋 CLAUDE CODE PROCESSING REQUIRED")
+                print("="*60)
+                print(f"\n{len(prompt_files)} prompts have been created in: data/prompts/")
+                print("\nTo process with Claude Code:")
+                print("1. Open each prompt file")
+                print("2. Copy content to Claude")
+                print("3. Save responses to data/summaries/")
+                print("\nThen run: python3 pipeline/run_pipeline.py --process-summaries")
+                
+                return  # Exit here for manual processing
+                
+            elif self.config['features'].get('ai_processing', True):
                 self.logger.info("Step 2: Processing papers with Claude AI")
                 
                 # Limit papers per run
@@ -277,8 +305,25 @@ def main():
     parser.add_argument('--force', action='store_true', help='Force refetch')
     parser.add_argument('--config', type=str, help='Path to config file')
     parser.add_argument('--dry-run', action='store_true', help='Dry run without processing')
+    parser.add_argument('--use-local', action='store_true', help='Use Claude Code instead of API')
+    parser.add_argument('--process-summaries', action='store_true', help='Process completed Claude Code summaries')
     
     args = parser.parse_args()
+    
+    # If processing summaries, handle that separately
+    if args.process_summaries:
+        from local_processor import LocalClaudeProcessor
+        processor = LocalClaudeProcessor()
+        processed = processor.process_completed_summaries()
+        
+        if processed:
+            print(f"\n✅ Processed {len(processed)} summaries")
+            # Generate HTML
+            from generator import HTMLGenerator
+            generator = HTMLGenerator()
+            generator.generate_site(processed)
+            print("✅ Website generated!")
+        return
     
     # Determine date
     if args.date:
@@ -295,7 +340,7 @@ def main():
         print("DRY RUN MODE - No actual processing will occur")
         orchestrator.logger.info("Running in dry-run mode")
     else:
-        orchestrator.run_pipeline(date, force=args.force)
+        orchestrator.run_pipeline(date, force=args.force, use_local=args.use_local)
 
 
 if __name__ == '__main__':

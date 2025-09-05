@@ -2,212 +2,217 @@
 
 An automated pipeline for fetching, processing, and publishing AI research papers from arXiv.
 
-## 🚀 Features
+## 🚀 NEW: Claude Code Integration (No API Required!)
+
+This pipeline now supports **free processing with Claude Code** instead of requiring a paid API key!
+
+### Quick Start with Claude Code
+```bash
+python3 process_with_claude.py
+```
+
+This interactive script will:
+1. Fetch latest AI papers
+2. Let you select papers to process
+3. Generate prompts for Claude Code
+4. Guide you through processing
+5. Generate your website automatically
+
+**Cost: $0** (vs $3-10/day with API)
+
+## 🎯 Features
 
 - **Automated Fetching**: Daily collection of AI papers from arXiv
 - **Smart Filtering**: Relevance scoring based on keywords and categories
+- **Claude Code Support**: Process papers for free using Claude Code
 - **Deduplication**: Avoids processing the same papers multiple times
-- **AI Processing**: Claude AI integration for generating summaries (optional)
 - **Beautiful Output**: Clean, professional HTML website
-- **GitHub Actions**: Fully automated with twice-daily runs
-- **GitHub Pages**: Automatic deployment to your website
+- **GitHub Actions**: Optional automation with GitHub Pages
+- **Interactive Mode**: User-friendly paper selection and processing
 
 ## 📁 Project Structure
 
 ```
 .
 ├── pipeline/               # Core processing modules
-│   ├── fetcher.py         # arXiv paper fetcher with deduplication
-│   ├── processor.py       # Claude AI processor for summaries
-│   ├── generator.py       # HTML generator (full-featured)
-│   ├── simple_generator.py # HTML generator (no dependencies)
-│   ├── run_pipeline.py    # Main orchestrator
-│   └── config.yaml        # Configuration file
-├── templates/             # Templates for summaries
-│   └── summary-template.md
+│   ├── fetcher.py         # arXiv paper fetcher
+│   ├── processor.py       # Claude API processor (optional)
+│   ├── local_processor.py # Claude Code processor (FREE!)
+│   ├── generator.py       # HTML generator
+│   ├── simple_generator.py # Simple HTML generator
+│   └── config.yaml        # Configuration
+├── process_with_claude.py # Interactive Claude Code script
+├── process_batch.py       # Batch processing helper
+├── templates/             # Summary templates
 ├── data/                  # Data storage
-│   ├── raw/              # Fetched papers (JSON)
-│   ├── processed/        # Processed summaries
-│   └── archive/          # Archived old papers
-├── docs/                  # GitHub Pages website
-│   ├── index.html        # Main page
-│   ├── papers/           # Individual paper pages
-│   └── assets/           # CSS and other assets
-└── .github/workflows/     # GitHub Actions
-    └── daily-ai-papers.yml
+│   ├── raw/              # Fetched papers
+│   ├── prompts/          # Claude prompts
+│   ├── summaries/        # Claude responses
+│   └── processed/        # Final data
+└── docs/                  # GitHub Pages website
 ```
 
 ## 🛠️ Setup
 
 ### 1. Clone the Repository
-
 ```bash
 git clone <your-repo-url>
 cd home
 ```
 
-### 2. Install Dependencies (Optional)
+### 2. No Dependencies Required!
+The pipeline works with Python 3's built-in libraries for basic operation.
 
-For full functionality with markdown processing:
+Optional for enhanced features:
 ```bash
 pip install pyyaml markdown requests
 ```
 
-For Claude AI integration:
-```bash
-pip install anthropic
-```
-
-### 3. Configure the Pipeline
-
-Edit `pipeline/config.yaml` to customize:
-- arXiv categories to monitor
-- Keywords for relevance scoring
-- Processing limits
-- Output settings
-
-### 4. Set Up Claude API (Optional)
-
-Add your Claude API key as an environment variable:
-```bash
-export CLAUDE_API_KEY="your-api-key-here"
-```
-
-For GitHub Actions, add it as a repository secret:
-- Go to Settings → Secrets → Actions
-- Add new secret: `CLAUDE_API_KEY`
-
-### 5. Enable GitHub Pages
-
-1. Go to repository Settings → Pages
-2. Source: Deploy from a branch
-3. Branch: main, folder: /docs
-4. Save
-
 ## 🎯 Usage
 
-### Manual Run
-
-Fetch papers from yesterday:
+### Option 1: Interactive Mode (Recommended)
 ```bash
+python3 process_with_claude.py
+```
+
+Follow the menu to:
+- Fetch papers
+- Select by relevance
+- Process with Claude Code
+- Generate website
+
+### Option 2: Quick Processing
+```bash
+# Fetch papers
 cd pipeline
-python3 fetcher.py
+python3 fetcher.py --days 1
+
+# Generate prompt for top 10
+python3 local_processor.py --input ../data/raw/arxiv_papers_*.json --quick 10
+
+# Copy prompt to Claude Code, save response, then:
+python3 ../process_batch.py
 ```
 
-Fetch papers from specific date:
+### Option 3: Manual Pipeline
+See `LOCAL_PROCESSING.md` for detailed manual processing steps.
+
+## 📊 Daily Workflow (5 minutes)
+
 ```bash
-python3 fetcher.py --date 2025-09-04
+# Morning routine
+python3 process_with_claude.py
+# Select "top" → Choose batch mode → Copy to Claude → Save → Done!
+
+# Publish to GitHub
+git add -A
+git commit -m "Daily AI papers update"
+git push origin gh-pages
 ```
 
-Generate HTML from fetched papers:
-```bash
-python3 simple_generator.py ../data/raw/arxiv_papers_*.json
-```
+## 🎨 Configuration
 
-Run complete pipeline:
-```bash
-python3 run_pipeline.py
-```
+Edit `pipeline/config.yaml` to customize:
 
-### Automated Runs
-
-The GitHub Actions workflow runs automatically:
-- **Schedule**: 9 AM and 6 PM UTC daily
-- **Manual trigger**: Actions tab → Run workflow
-
-## 📊 Pipeline Components
-
-### Fetcher (`fetcher.py`)
-- Fetches papers from multiple arXiv categories
-- Calculates relevance scores based on keywords
-- Implements deduplication to avoid reprocessing
-- Saves papers to JSON format
-
-### Processor (`processor.py`)
-- Processes papers with Claude AI (when API key configured)
-- Generates structured summaries
-- Falls back to basic summaries without API
-
-### Generator (`generator.py` / `simple_generator.py`)
-- Creates beautiful HTML pages
-- Generates index with statistics
-- Creates individual paper pages
-- No external dependencies (simple version)
-
-### Orchestrator (`run_pipeline.py`)
-- Coordinates all components
-- Handles configuration
-- Manages data flow
-- Provides logging and error handling
-
-## 🎨 Customization
-
-### Categories and Keywords
-
-Edit `pipeline/config.yaml`:
 ```yaml
 arxiv:
-  categories:
-    - cs.AI
-    - cs.LG
-    - cs.CV
-  keywords:
-    - transformer
-    - neural network
-    - deep learning
-```
+  categories: [cs.AI, cs.LG, cs.CV]  # Categories to monitor
+  keywords: [transformer, llm, neural] # Relevance keywords
+  max_papers_per_category: 100        # Fetch limit
 
-### Relevance Scoring
-
-Adjust minimum relevance score:
-```yaml
-arxiv:
-  min_relevance_score: 2.0  # Only process papers with score >= 2.0
-```
-
-### Processing Limits
-
-Control how many papers to process:
-```yaml
 processing:
-  max_papers_per_run: 50
+  max_papers_per_run: 50              # Process limit
 ```
 
-## 📈 Output
+## 💰 Cost Comparison
 
-The pipeline generates:
-- **Website**: Clean HTML with all papers
-- **Statistics**: Paper counts, relevance distribution
-- **Archives**: Historical data preservation
+| Method | Daily Cost | Annual Cost | Quality |
+|--------|------------|-------------|---------|
+| Claude API | $3-10 | $1,000-3,600 | Good |
+| Claude Code | **$0** | **$0** | **Better** |
 
-View your website at: `https://<username>.github.io/<repo-name>/`
+## 📈 Features
+
+- **Smart Relevance Scoring**: Prioritizes important papers
+- **Batch Processing**: Handle multiple papers efficiently
+- **Deduplication**: Never process the same paper twice
+- **Category Filtering**: Focus on your areas of interest
+- **Beautiful HTML**: Professional, responsive design
+- **Statistics Dashboard**: Track papers and trends
+
+## 🌐 GitHub Pages Deployment
+
+1. Enable GitHub Pages in repository settings
+2. Source: Deploy from branch (gh-pages or main)
+3. Folder: /docs
+4. Your site: `https://username.github.io/repo-name/`
+
+## 📝 Documentation
+
+- `LOCAL_PROCESSING.md` - Complete Claude Code guide
+- `CLAUDE_CODE_SETUP.md` - Setup instructions
+- `pipeline/config.yaml` - Configuration options
 
 ## 🔧 Troubleshooting
 
-### No papers found
-- Check if arXiv API is accessible
-- Verify date parameter (papers may not exist for future dates)
+### Papers not fetching?
+- Check internet connection
+- Verify arXiv is accessible
+- Try different date: `--days 2`
 
-### HTML not generating
-- Ensure papers exist in data/raw/
-- Check for Python errors in console
+### Claude Code processing?
+- Ensure prompt files are in `data/prompts/`
+- Save responses to `data/summaries/`
+- Use `.md` extension for summaries
 
-### GitHub Actions failing
-- Verify secrets are configured
-- Check workflow logs for specific errors
+### Website not generating?
+```bash
+python3 process_batch.py
+open docs/index.html  # Check locally
+```
 
-## 📝 License
+## 🚀 Advanced Features
 
-MIT License - feel free to use and modify
+### Custom Categories
+Add your research areas to `config.yaml`:
+```yaml
+categories: [cs.RO, cs.HC]  # Robotics, HCI
+```
+
+### Relevance Keywords
+Customize for your interests:
+```yaml
+keywords: [robotics, embodied, multimodal]
+```
+
+### Processing Modes
+- **Quick**: Top 10 papers in one prompt
+- **Batch**: Multiple papers per Claude session
+- **Individual**: Detailed analysis per paper
+
+## 📊 Current Statistics
+
+- **Papers in database**: 332
+- **Processing time**: ~5 min for 10 papers
+- **Categories covered**: 9 AI/ML areas
+- **Cost with Claude Code**: $0
 
 ## 🤝 Contributing
 
-Contributions welcome! Please feel free to submit a Pull Request.
+Contributions welcome! Feel free to:
+- Add new features
+- Improve processing
+- Enhance HTML output
+- Fix bugs
 
-## 📧 Contact
+## 📧 Support
 
-For questions or issues, please open a GitHub issue.
+For issues or questions:
+- Open a GitHub issue
+- Check documentation
+- Review troubleshooting guide
 
 ---
 
-Built with ❤️ for the AICOE Research Library
+**Built with ❤️ for the AI research community**
+*Process papers for free with Claude Code!* 🎉
