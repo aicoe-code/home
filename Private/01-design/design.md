@@ -3,6 +3,8 @@
 ## Core Principles
 Clean, professional, minimal - inspired by shadcn/ui design philosophy
 
+Use lucide icons
+
 ## Visual Identity
 
 ### Design Philosophy
