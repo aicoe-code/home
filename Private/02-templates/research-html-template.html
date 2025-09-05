@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>[PAPER_TITLE] - AICOE</title>
+    <link rel="stylesheet" href="../styles.css">
+</head>
+<body>
+    <div class="container">
+        <nav class="breadcrumb">
+            <a href="../index.html">Home</a> / 
+            <a href="index.html">Research</a> / 
+            <span>Current</span>
+        </nav>
+        
+        <header class="research-header">
+            <div class="metadata-card">
+                <h1 class="research-title">[PAPER_TITLE]</h1>
+                
+                <div class="paper-meta">
+                    <span class="meta-item">📅 [REVIEW_DATE]</span>
+                    <span class="meta-item">📄 [PUBLICATION_VENUE]</span>
+                    <span class="meta-item">🔗 <a href="[ARXIV_URL]" target="_blank">arXiv:[ARXIV_ID]</a></span>
+                </div>
+                
+                <div class="tags">
+                    <!-- Add tags as needed -->
+                    <span class="tag">[TAG_1]</span>
+                    <span class="tag">[TAG_2]</span>
+                    <span class="tag">[TAG_3]</span>
+                    <span class="tag">[TAG_4]</span>
+                    <span class="tag">[TAG_5]</span>
+                </div>
+            </div>
+            
+            <div class="scores-container">
+                <!-- Relevance Score -->
+                <div class="score-badge">
+                    <span class="score-label">Relevance</span>
+                    <div class="score-bar">
+                        <div class="score-fill" style="width: [RELEVANCE_PERCENT]%; background-color: [RELEVANCE_COLOR];"></div>
+                    </div>
+                    <span class="score-value">[RELEVANCE_SCORE]/5</span>
+                </div>
+                
+                <!-- Reproducibility Score -->
+                <div class="score-badge">
+                    <span class="score-label">Reproducibility</span>
+                    <div class="score-bar">
+                        <div class="score-fill" style="width: [REPRODUCIBILITY_PERCENT]%; background-color: [REPRODUCIBILITY_COLOR];"></div>
+                    </div>
+                    <span class="score-value">[REPRODUCIBILITY_SCORE]/5</span>
+                </div>
+                
+                <!-- Impact Score -->
+                <div class="score-badge">
+                    <span class="score-label">Impact</span>
+                    <div class="score-bar">
+                        <div class="score-fill" style="width: [IMPACT_PERCENT]%; background-color: [IMPACT_COLOR];"></div>
+                    </div>
+                    <span class="score-value">[IMPACT_SCORE]/5</span>
+                </div>
+            </div>
+            
+            <div class="alignment-indicators">
+                <h4>AICOE Mission Alignment</h4>
+                <div class="alignment-grid">
+                    <div class="alignment-item [UNDERSTANDING_ACTIVE]">
+                        <span class="indicator">✓</span> Understanding
+                    </div>
+                    <div class="alignment-item [DESIGN_ACTIVE]">
+                        <span class="indicator">✓</span> Design
+                    </div>
+                    <div class="alignment-item [DEPLOYMENT_ACTIVE]">
+                        <span class="indicator">✓</span> Deployment
+                    </div>
+                    <div class="alignment-item [OPERATION_ACTIVE]">
+                        <span class="indicator">✓</span> Operation
+                    </div>
+                </div>
+            </div>
+            
+            <div class="priority-badge priority-[PRIORITY_LEVEL]">
+                Priority: [PRIORITY_LEVEL]
+            </div>
+        </header>
+        
+        <main class="research-content">
+            <h1>[PAPER_TITLE]</h1>
+            <h2>AI Systems Research Analysis</h2>
+
+            <h3>Paper Metadata<span class="section-type"> <strong>[Required]</strong></span></h3>
+            <strong>Title:</strong> [FULL_PAPER_TITLE]  
+            <strong>Authors:</strong> [AUTHORS_LIST]  
+            <strong>Publication:</strong> [PUBLICATION_NAME]  
+            <strong>Date:</strong> [PUBLICATION_DATE]  
+            <strong>DOI/Link:</strong> [DOI_OR_URL]  
+            <strong>Keywords:</strong> [KEYWORDS_LIST]  
+            <strong>Paper Type:</strong> [PAPER_TYPE]
+
+            <hr>
+
+            <h3>Executive Summary<span class="section-type"> <strong>[Required]</strong></span></h3>
+            [EXECUTIVE_SUMMARY_TEXT]
+
+            <hr>
+
+            <h3>Research Context<span class="section-type"> <strong>[Required]</strong></span></h3>
+
+            <h4>Problem Statement</h4>
+            [PROBLEM_STATEMENT_TEXT]
+
+            <h4>Research Questions</h4>
+            <ul>
+                <li>[RESEARCH_QUESTION_1]</li>
+                <li>[RESEARCH_QUESTION_2]</li>
+                <!-- Add more as needed -->
+            </ul>
+
+            <h4>Relevance to AICOE Mission</h4>
+            <ul class="checkbox-list">
+                <li class="checkbox-item"><input type="checkbox" [UNDERSTANDING_CHECKED] disabled> <strong>Understanding</strong>: Advances comprehension of AI technologies</li>
+                <li class="checkbox-item"><input type="checkbox" [DESIGN_CHECKED] disabled> <strong>Design</strong>: Contributes to AI solution architecture</li>
+                <li class="checkbox-item"><input type="checkbox" [DEPLOYMENT_CHECKED] disabled> <strong>Deployment</strong>: Improves implementation methodologies</li>
+                <li class="checkbox-item"><input type="checkbox" [OPERATION_CHECKED] disabled> <strong>Operation</strong>: Enhances production system management</li>
+            </ul>
+
+            <hr>
+
+            <h3>Methodology<span class="section-type"> <strong>[Conditional - Required for Empirical/Technical]</strong></span></h3>
+            
+            <!-- For N/A sections, use this format:
+            <blockquote>☐ Not Applicable - Reason: [REASON_TEXT]</blockquote>
+            -->
+
+            <h4>Research Approach</h4>
+            [RESEARCH_APPROACH_TEXT]
+
+            <h4>Data & Resources <strong>[Optional]</strong></h4>
+            <ul>
+                <li><strong>Dataset(s):</strong> [DATASETS_DESCRIPTION]</li>
+                <li><strong>Computational Resources:</strong> [RESOURCES_DESCRIPTION]</li>
+                <li><strong>Evaluation Metrics:</strong> [METRICS_DESCRIPTION]</li>
+            </ul>
+
+            <hr>
+
+            <h3>Key Findings<span class="section-type"> <strong>[Required]</strong></span></h3>
+
+            <h4>Main Contributions</h4>
+            <ul>
+                <li><strong>[CONTRIBUTION_1_TITLE]:</strong> [CONTRIBUTION_1_DESCRIPTION]</li>
+                <li><strong>[CONTRIBUTION_2_TITLE]:</strong> [CONTRIBUTION_2_DESCRIPTION]</li>
+                <li><strong>[CONTRIBUTION_3_TITLE]:</strong> [CONTRIBUTION_3_DESCRIPTION]</li>
+            </ul>
+
+            <h4>Technical Innovations <strong>[Optional]</strong></h4>
+            [TECHNICAL_INNOVATIONS_TEXT]
+
+            <h4>Performance Results <strong>[Conditional - Required for Empirical]</strong></h4>
+            <table>
+                <tr><th>Metric</th><th>Baseline</th><th>Proposed Method</th><th>Improvement</th></tr>
+                <tr><td>[METRIC_1]</td><td>[BASELINE_1]</td><td>[PROPOSED_1]</td><td>[IMPROVEMENT_1]</td></tr>
+                <tr><td>[METRIC_2]</td><td>[BASELINE_2]</td><td>[PROPOSED_2]</td><td>[IMPROVEMENT_2]</td></tr>
+                <!-- Add more rows as needed -->
+            </table>
+
+            <hr>
+
+            <h3>Critical Analysis<span class="section-type"> <strong>[Required]</strong></span></h3>
+
+            <h4>Strengths</h4>
+            <ul>
+                <li>[STRENGTH_1]</li>
+                <li>[STRENGTH_2]</li>
+                <li>[STRENGTH_3]</li>
+            </ul>
+
+            <h4>Limitations</h4>
+            <ul>
+                <li>[LIMITATION_1]</li>
+                <li>[LIMITATION_2]</li>
+                <li>[LIMITATION_3]</li>
+            </ul>
+
+            <h4>Assumptions & Constraints</h4>
+            [ASSUMPTIONS_TEXT]
+
+            <hr>
+
+            <h3>Practical Applications<span class="section-type"> <strong>[Optional]</strong></span></h3>
+
+            <h4>Implementation Potential</h4>
+            [IMPLEMENTATION_POTENTIAL_TEXT]
+
+            <h4>Use Cases</h4>
+            <ul>
+                <li><strong>[USE_CASE_1_NAME]:</strong> [USE_CASE_1_DESCRIPTION]</li>
+                <li><strong>[USE_CASE_2_NAME]:</strong> [USE_CASE_2_DESCRIPTION]</li>
+            </ul>
+
+            <h4>Integration Considerations</h4>
+            <ul>
+                <li><strong>Technical Requirements:</strong> [TECHNICAL_REQUIREMENTS]</li>
+                <li><strong>Resource Requirements:</strong> [RESOURCE_REQUIREMENTS]</li>
+                <li><strong>Timeline:</strong> [TIMELINE]</li>
+            </ul>
+
+            <hr>
+
+            <h3>Ethical & Societal Implications<span class="section-type"> <strong>[Conditional - Required for Empirical/Technical]</strong></span></h3>
+
+            <h4>Ethical Considerations</h4>
+            <ul>
+                <li><strong>Bias & Fairness:</strong> [BIAS_ASSESSMENT]</li>
+                <li><strong>Privacy:</strong> [PRIVACY_CONSIDERATIONS]</li>
+                <li><strong>Transparency:</strong> [TRANSPARENCY_LEVEL]</li>
+            </ul>
+
+            <h4>Societal Impact</h4>
+            [SOCIETAL_IMPACT_TEXT]
+
+            <hr>
+
+            <h3>Reproducibility Assessment<span class="section-type"> <strong>[Conditional - Required for Empirical/Technical]</strong></span></h3>
+
+            <h4>Code Availability</h4>
+            <ul class="checkbox-list">
+                <li class="checkbox-item"><input type="checkbox" [CODE_OPEN_SOURCE] disabled> Open source code provided</li>
+                <li class="checkbox-item"><input type="checkbox" [CODE_PSEUDOCODE] disabled> Pseudocode included</li>
+                <li class="checkbox-item"><input type="checkbox" [CODE_NOT_AVAILABLE] disabled> No code available</li>
+            </ul>
+            <ul>
+                <li><strong>Repository:</strong> [REPOSITORY_LINK]</li>
+            </ul>
+
+            <h4>Data Availability</h4>
+            <ul class="checkbox-list">
+                <li class="checkbox-item"><input type="checkbox" [DATA_PUBLIC] disabled> Public dataset</li>
+                <li class="checkbox-item"><input type="checkbox" [DATA_PRIVATE] disabled> Private dataset with access process</li>
+                <li class="checkbox-item"><input type="checkbox" [DATA_PROPRIETARY] disabled> Proprietary/unavailable data</li>
+            </ul>
+
+            <h4>Reproducibility Score</h4>
+            [REPRODUCIBILITY_SCORE_TEXT]
+
+            <hr>
+
+            <h3>Future Research Directions<span class="section-type"> <strong>[Required]</strong></span></h3>
+
+            <h4>Open Questions</h4>
+            <ul>
+                <li>[OPEN_QUESTION_1]</li>
+                <li>[OPEN_QUESTION_2]</li>
+            </ul>
+
+            <h4>Suggested Extensions</h4>
+            <ul>
+                <li>[EXTENSION_1]</li>
+                <li>[EXTENSION_2]</li>
+            </ul>
+
+            <hr>
+
+            <h3>Key Takeaways for AICOE<span class="section-type"> <strong>[Required]</strong></span></h3>
+
+            <h4>Actionable Insights</h4>
+            <ul>
+                <li><strong>[INSIGHT_1_TITLE]:</strong> [INSIGHT_1_ACTION]</li>
+                <li><strong>[INSIGHT_2_TITLE]:</strong> [INSIGHT_2_ACTION]</li>
+                <li><strong>[INSIGHT_3_TITLE]:</strong> [INSIGHT_3_ACTION]</li>
+            </ul>
+
+            <h4>Recommended Next Steps</h4>
+            <ul class="checkbox-list">
+                <li class="checkbox-item"><input type="checkbox" [EVALUATE_PILOT] disabled> Evaluate for internal pilot project</li>
+                <li class="checkbox-item"><input type="checkbox" [SHARE_TEAMS] disabled> Share with relevant team(s): [TEAM_NAMES]</li>
+                <li class="checkbox-item"><input type="checkbox" [SCHEDULE_PRESENTATION] disabled> Schedule deep-dive presentation</li>
+                <li class="checkbox-item"><input type="checkbox" [ADD_REPOSITORY] disabled> Add to knowledge repository</li>
+                <li class="checkbox-item"><input type="checkbox" [CONSIDER_PRODUCTION] disabled> Consider for production implementation</li>
+            </ul>
+
+            <hr>
+
+            <h3>Related Work<span class="section-type"> <strong>[Optional]</strong></span></h3>
+            <ul>
+                <li><strong>[RELATED_PAPER_1]:</strong> [RELATIONSHIP_1]</li>
+                <li><strong>[RELATED_PAPER_2]:</strong> [RELATIONSHIP_2]</li>
+                <li><strong>[RELATED_PAPER_3]:</strong> [RELATIONSHIP_3]</li>
+            </ul>
+
+            <hr>
+
+            <h3>Reviewer Information<span class="section-type"> <strong>[Required]</strong></span></h3>
+            <strong>Reviewed by:</strong> [REVIEWER_NAME]  
+            <strong>Review Date:</strong> [REVIEW_DATE]  
+            <strong>Expertise Area:</strong> [EXPERTISE_AREA]  
+            <strong>Confidence Level:</strong> [CONFIDENCE_LEVEL]
+
+            <hr>
+
+            <h3>Additional Notes<span class="section-type"> <strong>[Optional]</strong></span></h3>
+            [ADDITIONAL_NOTES_TEXT]
+
+            <hr>
+
+            <h2>Summary Checklist</h2>
+            <ul class="checkbox-list">
+                <li class="checkbox-item"><input type="checkbox" checked disabled> All required sections completed or marked N/A with reason</li>
+                <li class="checkbox-item"><input type="checkbox" checked disabled> Paper type selected and conditional sections addressed</li>
+                <li class="checkbox-item"><input type="checkbox" checked disabled> Technical accuracy verified</li>
+                <li class="checkbox-item"><input type="checkbox" checked disabled> Practical applications identified (if applicable)</li>
+                <li class="checkbox-item"><input type="checkbox" checked disabled> Ethical implications considered (if applicable)</li>
+                <li class="checkbox-item"><input type="checkbox" checked disabled> Actionable insights extracted</li>
+                <li class="checkbox-item"><input type="checkbox" checked disabled> Relevant teams identified for sharing</li>
+            </ul>
+
+            <h3>Section Completion Summary</h3>
+            <ul>
+                <li><strong>Required Sections</strong>: [REQUIRED_COMPLETED]/7 completed</li>
+                <li><strong>Applicable Conditional Sections</strong>: [CONDITIONAL_COMPLETED]/[CONDITIONAL_TOTAL] completed</li>
+                <li><strong>Optional Sections Used</strong>: [OPTIONAL_USED]/5</li>
+                <li><strong>N/A Sections Documented</strong>: [NA_DOCUMENTED]/[NA_TOTAL] with reasons</li>
+            </ul>
+
+            <hr>
+
+            <em>Template Version: 2.0 | Last Updated: 2025</em>  
+            <em>AICOE - Advancing AI Understanding, Design, Deployment, and Operation</em>
+        </main>
+        
+        <footer class="research-footer">
+            <div class="footer-meta">
+                <p>Reviewed by: [REVIEWER_NAME]</p>
+                <p>Confidence Level: [CONFIDENCE_LEVEL]</p>
+                <p>Template Version: 2.0</p>
+            </div>
+            
+            <div class="navigation-links">
+                <a href="index.html" class="btn btn-secondary">← Back to Research</a>
+            </div>
+        </footer>
+    </div>
+</body>
+</html>

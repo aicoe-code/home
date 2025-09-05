@@ -160,7 +160,6 @@ def generate_html(metadata, content):
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{metadata.get('title', 'Research Summary')} - AICOE</title>
     <link rel="stylesheet" href="../styles.css">
-    <link rel="stylesheet" href="research.css">
 </head>
 <body>
     <div class="container">
