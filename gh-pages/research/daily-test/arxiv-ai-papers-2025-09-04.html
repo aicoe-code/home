@@ -1,0 +1,560 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Papers - 2025-09-05 - AICOE</title>
+    <style>
+        /* AICOE Design System - Minimal, Clean, Professional */
+        :root {
+            /* Colors */
+            --color-background: #FFFFFF;
+            --color-background-subtle: #FAFAFA;
+            --color-foreground: #09090B;
+            --color-muted: #71717A;
+            --color-border: #E4E4E7;
+            --color-accent: #18181B;
+            
+            /* Typography */
+            --font-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            
+            /* Font Sizes */
+            --text-xs: 0.75rem;
+            --text-sm: 0.875rem;
+            --text-base: 1rem;
+            --text-lg: 1.125rem;
+            --text-xl: 1.25rem;
+            --text-2xl: 1.5rem;
+            --text-3xl: 2rem;
+            
+            /* Spacing (8px grid) */
+            --space-2: 0.5rem;
+            --space-3: 0.75rem;
+            --space-4: 1rem;
+            --space-6: 1.5rem;
+            --space-8: 2rem;
+            --space-12: 3rem;
+            
+            /* Borders & Shadows */
+            --radius-base: 0.25rem;
+            --radius-md: 0.375rem;
+            --radius-lg: 0.5rem;
+            --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+            --shadow-base: 0 1px 3px 0 rgb(0 0 0 / 0.1);
+            
+            /* Layout */
+            --max-width: 1200px;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: var(--font-sans);
+            font-size: var(--text-base);
+            line-height: 1.6;
+            color: var(--color-foreground);
+            background-color: var(--color-background);
+        }
+        
+        .container {
+            max-width: var(--max-width);
+            margin: 0 auto;
+            padding: var(--space-6);
+        }
+        
+        /* Typography */
+        h1 {
+            font-size: var(--text-3xl);
+            font-weight: 600;
+            line-height: 1.25;
+            margin-bottom: var(--space-4);
+        }
+        
+        h3 {
+            font-size: var(--text-lg);
+            font-weight: 600;
+            line-height: 1.4;
+            margin-bottom: var(--space-3);
+        }
+        
+        p {
+            color: var(--color-muted);
+            line-height: 1.6;
+        }
+        
+        a {
+            color: var(--color-accent);
+            text-decoration: none;
+            transition: opacity 200ms ease;
+        }
+        
+        a:hover {
+            opacity: 0.8;
+        }
+        
+        /* Navigation */
+        .breadcrumb {
+            font-size: var(--text-sm);
+            color: var(--color-muted);
+            margin-bottom: var(--space-8);
+        }
+        
+        .breadcrumb a {
+            color: var(--color-muted);
+        }
+        
+        .breadcrumb a:hover {
+            color: var(--color-foreground);
+        }
+        
+        /* Hero Section */
+        .hero {
+            background: var(--color-background-subtle);
+            border: 1px solid var(--color-border);
+            border-radius: var(--radius-lg);
+            padding: var(--space-12) var(--space-8);
+            margin-bottom: var(--space-8);
+            text-align: center;
+        }
+        
+        .hero p {
+            font-size: var(--text-lg);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        /* Stats Grid */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: var(--space-4);
+            margin-bottom: var(--space-8);
+        }
+        
+        .stat-card {
+            background: var(--color-background);
+            border: 1px solid var(--color-border);
+            border-radius: var(--radius-lg);
+            padding: var(--space-6);
+            text-align: center;
+        }
+        
+        .stat-number {
+            font-size: var(--text-2xl);
+            font-weight: 600;
+            color: var(--color-foreground);
+            margin-bottom: var(--space-2);
+        }
+        
+        .stat-label {
+            font-size: var(--text-sm);
+            color: var(--color-muted);
+        }
+        
+        /* Paper Cards */
+        .papers-list {
+            display: flex;
+            flex-direction: column;
+            gap: var(--space-4);
+        }
+        
+        .paper-card {
+            background: var(--color-background);
+            border: 1px solid var(--color-border);
+            border-radius: var(--radius-lg);
+            padding: var(--space-6);
+            transition: box-shadow 200ms ease;
+        }
+        
+        .paper-card:hover {
+            box-shadow: var(--shadow-base);
+        }
+        
+        .paper-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: var(--space-4);
+        }
+        
+        .paper-title {
+            flex: 1;
+            margin-right: var(--space-4);
+        }
+        
+        .relevance-badge {
+            font-size: var(--text-xs);
+            font-weight: 600;
+            padding: var(--space-2) var(--space-3);
+            border-radius: var(--radius-base);
+            white-space: nowrap;
+        }
+        
+        .relevance-high {
+            background: #FEE2E2;
+            color: #DC2626;
+            border: 1px solid #FCA5A5;
+        }
+        
+        .relevance-medium {
+            background: #FEF3C7;
+            color: #D97706;
+            border: 1px solid #FCD34D;
+        }
+        
+        .relevance-low {
+            background: #DBEAFE;
+            color: #2563EB;
+            border: 1px solid #93C5FD;
+        }
+        
+        .paper-meta {
+            display: flex;
+            flex-direction: column;
+            gap: var(--space-2);
+            margin-bottom: var(--space-4);
+            font-size: var(--text-sm);
+            color: var(--color-muted);
+        }
+        
+        .meta-row {
+            display: flex;
+            align-items: center;
+            gap: var(--space-2);
+        }
+        
+        .meta-label {
+            font-weight: 600;
+            min-width: 80px;
+        }
+        
+        .paper-abstract {
+            color: var(--color-muted);
+            line-height: 1.6;
+            margin-bottom: var(--space-3);
+        }
+        
+        .paper-comment {
+            font-size: var(--text-sm);
+            color: var(--color-muted);
+            font-style: italic;
+            padding-top: var(--space-3);
+            border-top: 1px solid var(--color-border);
+        }
+        
+        /* Footer */
+        .footer {
+            margin-top: var(--space-12);
+            padding-top: var(--space-6);
+            border-top: 1px solid var(--color-border);
+            text-align: center;
+            font-size: var(--text-sm);
+            color: var(--color-muted);
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .container {
+                padding: var(--space-4);
+            }
+            
+            .hero {
+                padding: var(--space-8) var(--space-4);
+            }
+            
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .paper-header {
+                flex-direction: column;
+            }
+            
+            .paper-title {
+                margin-right: 0;
+                margin-bottom: var(--space-3);
+            }
+        }
+        </style>
+</head>
+<body>
+    <div class="container">
+        <nav class="breadcrumb">
+            <a href="../../index.html">Home</a> / 
+            <a href="../index.html">Research</a> / 
+            <span>Daily AI Papers</span>
+        </nav>
+        
+        <div class="hero">
+            <h1>arXiv AI Papers - 2025-09-05</h1>
+            <p>Daily collection of 7 AI-related papers from arXiv</p>
+        </div>
+        
+        <div class="stats-grid">
+            <div class="stat-card">
+                <div class="stat-number">7</div>
+                <div class="stat-label">Total Papers</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">3</div>
+                <div class="stat-label">High Relevance</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">10</div>
+                <div class="stat-label">Categories</div>
+            </div>
+        </div>
+        
+        <div class="papers-list">
+
+            <div class="paper-card">
+                <div class="paper-header">
+                    <h3 class="paper-title">1. ACING: Actor-Critic for Instruction Learning in Black-Box LLMs</h3>
+                    <span class="relevance-badge relevance-high">High (5.5)</span>
+                </div>
+                
+                <div class="paper-meta">
+                    <div class="meta-row">
+                        <span class="meta-label">Authors:</span>
+                        <span>Salma Kharrat, Fares Fourati, Marco Canini</span>
+                    </div>
+                    <div class="meta-row">
+                        <span class="meta-label">Categories:</span>
+                        <span>cs.SY, math.OC, cs.LG, cs.CL, cs.AI, eess.SY</span>
+                    </div>
+                    <div class="meta-row">
+                        <span class="meta-label">Links:</span>
+                        <span>
+                            <a href="http://arxiv.org/abs/2411.12736v2" target="_blank">arXiv:2411.12736v2</a> | 
+                            <a href="http://arxiv.org/pdf/2411.12736v2" target="_blank">PDF</a>
+                        </span>
+                    </div>
+                </div>
+                
+                <p class="paper-abstract">The effectiveness of Large Language Models (LLMs) in solving tasks depends
+significantly on the quality of their instructions, which often require
+substantial human effort to craft. This underscores the need for automated
+instruction optimization. However, optimizing instructions is particularly
+challenging when working with black-box LLMs, where model parameters and
+gradients are inaccessible. We introduce ACING, an actor-critic reinforcement
+learning framework that formulates instruction optim...</p>
+                <div class="paper-comment">Note: Accepted at EMNLP 2025</div>
+            </div>
+
+            <div class="paper-card">
+                <div class="paper-header">
+                    <h3 class="paper-title">2. Delta Activations: A Representation for Finetuned Large Language Models</h3>
+                    <span class="relevance-badge relevance-high">High (4.5)</span>
+                </div>
+                
+                <div class="paper-meta">
+                    <div class="meta-row">
+                        <span class="meta-label">Authors:</span>
+                        <span>Zhiqiu Xu, Amish Sethi, Mayur Naik, et al.</span>
+                    </div>
+                    <div class="meta-row">
+                        <span class="meta-label">Categories:</span>
+                        <span>cs.AI, cs.LG, cs.IR, cs.CL</span>
+                    </div>
+                    <div class="meta-row">
+                        <span class="meta-label">Links:</span>
+                        <span>
+                            <a href="http://arxiv.org/abs/2509.04442v1" target="_blank">arXiv:2509.04442v1</a> | 
+                            <a href="http://arxiv.org/pdf/2509.04442v1" target="_blank">PDF</a>
+                        </span>
+                    </div>
+                </div>
+                
+                <p class="paper-abstract">The success of powerful open source Large Language Models (LLMs) has enabled
+the community to create a vast collection of post-trained models adapted to
+specific tasks and domains. However, navigating and understanding these models
+remains challenging due to inconsistent metadata and unstructured repositories.
+We introduce Delta Activations, a method to represent finetuned models as
+vector embeddings by measuring shifts in their internal activations relative to
+a base model. This representation ...</p>
+                
+            </div>
+
+            <div class="paper-card">
+                <div class="paper-header">
+                    <h3 class="paper-title">3. ArcMemo: Abstract Reasoning Composition with Lifelong LLM Memory</h3>
+                    <span class="relevance-badge relevance-high">High (4.5)</span>
+                </div>
+                
+                <div class="paper-meta">
+                    <div class="meta-row">
+                        <span class="meta-label">Authors:</span>
+                        <span>Matthew Ho, Chen Si, Zhaoxiang Feng, et al.</span>
+                    </div>
+                    <div class="meta-row">
+                        <span class="meta-label">Categories:</span>
+                        <span>cs.AI, cs.CL, cs.LG</span>
+                    </div>
+                    <div class="meta-row">
+                        <span class="meta-label">Links:</span>
+                        <span>
+                            <a href="http://arxiv.org/abs/2509.04439v1" target="_blank">arXiv:2509.04439v1</a> | 
+                            <a href="http://arxiv.org/pdf/2509.04439v1" target="_blank">PDF</a>
+                        </span>
+                    </div>
+                </div>
+                
+                <p class="paper-abstract">While inference-time scaling enables LLMs to carry out increasingly long and
+capable reasoning traces, the patterns and insights uncovered during these
+traces are immediately discarded once the context window is reset for a new
+query. External memory is a natural way to persist these discoveries, and
+recent work has shown clear benefits for reasoning-intensive tasks. We see an
+opportunity to make such memories more broadly reusable and scalable by moving
+beyond instance-based memory entries (e.g...</p>
+                
+            </div>
+
+            <div class="paper-card">
+                <div class="paper-header">
+                    <h3 class="paper-title">4. ChronoGraph: A Real-World Graph-Based Multivariate Time Series Dataset</h3>
+                    <span class="relevance-badge relevance-medium">Medium (1.5)</span>
+                </div>
+                
+                <div class="paper-meta">
+                    <div class="meta-row">
+                        <span class="meta-label">Authors:</span>
+                        <span>Adrian Catalin Lutu, Ioana Pintilie, Elena Burceanu, et al.</span>
+                    </div>
+                    <div class="meta-row">
+                        <span class="meta-label">Categories:</span>
+                        <span>cs.AI, cs.LG</span>
+                    </div>
+                    <div class="meta-row">
+                        <span class="meta-label">Links:</span>
+                        <span>
+                            <a href="http://arxiv.org/abs/2509.04449v1" target="_blank">arXiv:2509.04449v1</a> | 
+                            <a href="http://arxiv.org/pdf/2509.04449v1" target="_blank">PDF</a>
+                        </span>
+                    </div>
+                </div>
+                
+                <p class="paper-abstract">We present ChronoGraph, a graph-structured multivariate time series
+forecasting dataset built from real-world production microservices. Each node
+is a service that emits a multivariate stream of system-level performance
+metrics, capturing CPU, memory, and network usage patterns, while directed
+edges encode dependencies between services. The primary task is forecasting
+future values of these signals at the service level. In addition, ChronoGraph
+provides expert-annotated incident windows as anoma...</p>
+                
+            </div>
+
+            <div class="paper-card">
+                <div class="paper-header">
+                    <h3 class="paper-title">5. Virtual Fitting Room: Generating Arbitrarily Long Videos of Virtual   Try-On from a Single Image -- Technical Preview</h3>
+                    <span class="relevance-badge relevance-medium">Medium (1.5)</span>
+                </div>
+                
+                <div class="paper-meta">
+                    <div class="meta-row">
+                        <span class="meta-label">Authors:</span>
+                        <span>Jun-Kun Chen, Aayush Bansal, Minh Phuoc Vo, et al.</span>
+                    </div>
+                    <div class="meta-row">
+                        <span class="meta-label">Categories:</span>
+                        <span>cs.CV, cs.LG</span>
+                    </div>
+                    <div class="meta-row">
+                        <span class="meta-label">Links:</span>
+                        <span>
+                            <a href="http://arxiv.org/abs/2509.04450v1" target="_blank">arXiv:2509.04450v1</a> | 
+                            <a href="http://arxiv.org/pdf/2509.04450v1" target="_blank">PDF</a>
+                        </span>
+                    </div>
+                </div>
+                
+                <p class="paper-abstract">We introduce the Virtual Fitting Room (VFR), a novel video generative model
+that produces arbitrarily long virtual try-on videos. Our VFR models long video
+generation tasks as an auto-regressive, segment-by-segment generation process,
+eliminating the need for resource-intensive generation and lengthy video data,
+while providing the flexibility to generate videos of arbitrary length. The key
+challenges of this task are twofold: ensuring local smoothness between adjacent
+segments and maintaining g...</p>
+                <div class="paper-comment">Note: Project Page: https://immortalco.github.io/VirtualFittingRoom/</div>
+            </div>
+
+            <div class="paper-card">
+                <div class="paper-header">
+                    <h3 class="paper-title">6. DEXOP: A Device for Robotic Transfer of Dexterous Human Manipulation</h3>
+                    <span class="relevance-badge relevance-low">Low (0.5)</span>
+                </div>
+                
+                <div class="paper-meta">
+                    <div class="meta-row">
+                        <span class="meta-label">Authors:</span>
+                        <span>Hao-Shu Fang, Branden Romero, Yichen Xie, et al.</span>
+                    </div>
+                    <div class="meta-row">
+                        <span class="meta-label">Categories:</span>
+                        <span>cs.RO, cs.AI, cs.CV, cs.HC</span>
+                    </div>
+                    <div class="meta-row">
+                        <span class="meta-label">Links:</span>
+                        <span>
+                            <a href="http://arxiv.org/abs/2509.04441v1" target="_blank">arXiv:2509.04441v1</a> | 
+                            <a href="http://arxiv.org/pdf/2509.04441v1" target="_blank">PDF</a>
+                        </span>
+                    </div>
+                </div>
+                
+                <p class="paper-abstract">We introduce perioperation, a paradigm for robotic data collection that
+sensorizes and records human manipulation while maximizing the transferability
+of the data to real robots. We implement this paradigm in DEXOP, a passive hand
+exoskeleton designed to maximize human ability to collect rich sensory (vision
++ tactile) data for diverse dexterous manipulation tasks in natural
+environments. DEXOP mechanically connects human fingers to robot fingers,
+providing users with direct contact feedback (vi...</p>
+                <div class="paper-comment">Note: project page: https://dex-op.github.io</div>
+            </div>
+
+            <div class="paper-card">
+                <div class="paper-header">
+                    <h3 class="paper-title">7. Towards Cognitively-Faithful Decision-Making Models to Improve AI   Alignment</h3>
+                    <span class="relevance-badge relevance-low">Low (0.5)</span>
+                </div>
+                
+                <div class="paper-meta">
+                    <div class="meta-row">
+                        <span class="meta-label">Authors:</span>
+                        <span>Cyrus Cousins, Vijay Keswani, Vincent Conitzer, et al.</span>
+                    </div>
+                    <div class="meta-row">
+                        <span class="meta-label">Categories:</span>
+                        <span>cs.LG</span>
+                    </div>
+                    <div class="meta-row">
+                        <span class="meta-label">Links:</span>
+                        <span>
+                            <a href="http://arxiv.org/abs/2509.04445v1" target="_blank">arXiv:2509.04445v1</a> | 
+                            <a href="http://arxiv.org/pdf/2509.04445v1" target="_blank">PDF</a>
+                        </span>
+                    </div>
+                </div>
+                
+                <p class="paper-abstract">Recent AI work trends towards incorporating human-centric objectives, with
+the explicit goal of aligning AI models to personal preferences and societal
+values. Using standard preference elicitation methods, researchers and
+practitioners build models of human decisions and judgments, which are then
+used to align AI behavior with that of humans. However, models commonly used in
+such elicitation processes often do not capture the true cognitive processes of
+human decision making, such as when peopl...</p>
+                
+            </div>
+
+        </div>
+        
+        <footer class="footer">
+            <p>Generated on 2025-09-05 at 19:05:55</p>
+            <p>AICOE Research Library - AI Papers Daily Digest</p>
+        </footer>
+    </div>
+</body>
+</html>

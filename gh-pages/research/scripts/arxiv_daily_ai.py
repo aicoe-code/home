@@ -80,7 +80,7 @@ class ArxivAIFetcher:
                 all_papers.extend(papers)
                 
                 # Rate limiting - wait 3 seconds between API calls
-                time.sleep(3)
+                time.sleep(10)
                 
             except Exception as e:
                 print(f"Error fetching papers from {category}: {e}")
@@ -218,8 +218,286 @@ class ArxivAIFetcher:
         print(f"Saved markdown to {filepath}")
     
     def save_html(self, filepath: str):
-        """Save papers to HTML file matching existing style"""
+        """Save papers to HTML file following AICOE design guidelines"""
         date_str = datetime.now().strftime('%Y-%m-%d')
+        
+        # Embedded CSS following design guidelines
+        css = '''
+        /* AICOE Design System - Minimal, Clean, Professional */
+        :root {
+            /* Colors */
+            --color-background: #FFFFFF;
+            --color-background-subtle: #FAFAFA;
+            --color-foreground: #09090B;
+            --color-muted: #71717A;
+            --color-border: #E4E4E7;
+            --color-accent: #18181B;
+            
+            /* Typography */
+            --font-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            
+            /* Font Sizes */
+            --text-xs: 0.75rem;
+            --text-sm: 0.875rem;
+            --text-base: 1rem;
+            --text-lg: 1.125rem;
+            --text-xl: 1.25rem;
+            --text-2xl: 1.5rem;
+            --text-3xl: 2rem;
+            
+            /* Spacing (8px grid) */
+            --space-2: 0.5rem;
+            --space-3: 0.75rem;
+            --space-4: 1rem;
+            --space-6: 1.5rem;
+            --space-8: 2rem;
+            --space-12: 3rem;
+            
+            /* Borders & Shadows */
+            --radius-base: 0.25rem;
+            --radius-md: 0.375rem;
+            --radius-lg: 0.5rem;
+            --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+            --shadow-base: 0 1px 3px 0 rgb(0 0 0 / 0.1);
+            
+            /* Layout */
+            --max-width: 1200px;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: var(--font-sans);
+            font-size: var(--text-base);
+            line-height: 1.6;
+            color: var(--color-foreground);
+            background-color: var(--color-background);
+        }
+        
+        .container {
+            max-width: var(--max-width);
+            margin: 0 auto;
+            padding: var(--space-6);
+        }
+        
+        /* Typography */
+        h1 {
+            font-size: var(--text-3xl);
+            font-weight: 600;
+            line-height: 1.25;
+            margin-bottom: var(--space-4);
+        }
+        
+        h3 {
+            font-size: var(--text-lg);
+            font-weight: 600;
+            line-height: 1.4;
+            margin-bottom: var(--space-3);
+        }
+        
+        p {
+            color: var(--color-muted);
+            line-height: 1.6;
+        }
+        
+        a {
+            color: var(--color-accent);
+            text-decoration: none;
+            transition: opacity 200ms ease;
+        }
+        
+        a:hover {
+            opacity: 0.8;
+        }
+        
+        /* Navigation */
+        .breadcrumb {
+            font-size: var(--text-sm);
+            color: var(--color-muted);
+            margin-bottom: var(--space-8);
+        }
+        
+        .breadcrumb a {
+            color: var(--color-muted);
+        }
+        
+        .breadcrumb a:hover {
+            color: var(--color-foreground);
+        }
+        
+        /* Hero Section */
+        .hero {
+            background: var(--color-background-subtle);
+            border: 1px solid var(--color-border);
+            border-radius: var(--radius-lg);
+            padding: var(--space-12) var(--space-8);
+            margin-bottom: var(--space-8);
+            text-align: center;
+        }
+        
+        .hero p {
+            font-size: var(--text-lg);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        /* Stats Grid */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: var(--space-4);
+            margin-bottom: var(--space-8);
+        }
+        
+        .stat-card {
+            background: var(--color-background);
+            border: 1px solid var(--color-border);
+            border-radius: var(--radius-lg);
+            padding: var(--space-6);
+            text-align: center;
+        }
+        
+        .stat-number {
+            font-size: var(--text-2xl);
+            font-weight: 600;
+            color: var(--color-foreground);
+            margin-bottom: var(--space-2);
+        }
+        
+        .stat-label {
+            font-size: var(--text-sm);
+            color: var(--color-muted);
+        }
+        
+        /* Paper Cards */
+        .papers-list {
+            display: flex;
+            flex-direction: column;
+            gap: var(--space-4);
+        }
+        
+        .paper-card {
+            background: var(--color-background);
+            border: 1px solid var(--color-border);
+            border-radius: var(--radius-lg);
+            padding: var(--space-6);
+            transition: box-shadow 200ms ease;
+        }
+        
+        .paper-card:hover {
+            box-shadow: var(--shadow-base);
+        }
+        
+        .paper-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: var(--space-4);
+        }
+        
+        .paper-title {
+            flex: 1;
+            margin-right: var(--space-4);
+        }
+        
+        .relevance-badge {
+            font-size: var(--text-xs);
+            font-weight: 600;
+            padding: var(--space-2) var(--space-3);
+            border-radius: var(--radius-base);
+            white-space: nowrap;
+        }
+        
+        .relevance-high {
+            background: #FEE2E2;
+            color: #DC2626;
+            border: 1px solid #FCA5A5;
+        }
+        
+        .relevance-medium {
+            background: #FEF3C7;
+            color: #D97706;
+            border: 1px solid #FCD34D;
+        }
+        
+        .relevance-low {
+            background: #DBEAFE;
+            color: #2563EB;
+            border: 1px solid #93C5FD;
+        }
+        
+        .paper-meta {
+            display: flex;
+            flex-direction: column;
+            gap: var(--space-2);
+            margin-bottom: var(--space-4);
+            font-size: var(--text-sm);
+            color: var(--color-muted);
+        }
+        
+        .meta-row {
+            display: flex;
+            align-items: center;
+            gap: var(--space-2);
+        }
+        
+        .meta-label {
+            font-weight: 600;
+            min-width: 80px;
+        }
+        
+        .paper-abstract {
+            color: var(--color-muted);
+            line-height: 1.6;
+            margin-bottom: var(--space-3);
+        }
+        
+        .paper-comment {
+            font-size: var(--text-sm);
+            color: var(--color-muted);
+            font-style: italic;
+            padding-top: var(--space-3);
+            border-top: 1px solid var(--color-border);
+        }
+        
+        /* Footer */
+        .footer {
+            margin-top: var(--space-12);
+            padding-top: var(--space-6);
+            border-top: 1px solid var(--color-border);
+            text-align: center;
+            font-size: var(--text-sm);
+            color: var(--color-muted);
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .container {
+                padding: var(--space-4);
+            }
+            
+            .hero {
+                padding: var(--space-8) var(--space-4);
+            }
+            
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .paper-header {
+                flex-direction: column;
+            }
+            
+            .paper-title {
+                margin-right: 0;
+                margin-bottom: var(--space-3);
+            }
+        }
+        '''
         
         html = f'''<!DOCTYPE html>
 <html lang="en">
@@ -227,7 +505,7 @@ class ArxivAIFetcher:
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>AI Papers - {date_str} - AICOE</title>
-    <link rel="stylesheet" href="../../styles.css">
+    <style>{css}</style>
 </head>
 <body>
     <div class="container">
@@ -237,9 +515,9 @@ class ArxivAIFetcher:
             <span>Daily AI Papers</span>
         </nav>
         
-        <div class="research-hero">
+        <div class="hero">
             <h1>arXiv AI Papers - {date_str}</h1>
-            <p>Daily collection of AI-related papers from arXiv. Total papers: {len(self.papers)}</p>
+            <p>Daily collection of {len(self.papers)} AI-related papers from arXiv</p>
         </div>
         
         <div class="stats-grid">
@@ -257,43 +535,68 @@ class ArxivAIFetcher:
             </div>
         </div>
         
-        <div class="research-content">
+        <div class="papers-list">
 '''
         
         for i, paper in enumerate(self.papers, 1):
-            # Determine priority based on relevance score
+            # Determine relevance level
             if paper['relevance_score'] > 3:
-                priority_class = 'priority-high'
-                priority_text = 'High Relevance'
+                relevance_class = 'relevance-high'
+                relevance_text = 'High'
             elif paper['relevance_score'] > 1:
-                priority_class = 'priority-medium'
-                priority_text = 'Medium Relevance'
+                relevance_class = 'relevance-medium'
+                relevance_text = 'Medium'
             else:
-                priority_class = 'priority-low'
-                priority_text = 'Low Relevance'
+                relevance_class = 'relevance-low'
+                relevance_text = 'Low'
+            
+            # Format authors
+            authors = paper['authors'][:3]
+            if len(paper['authors']) > 3:
+                authors.append('et al.')
+            authors_str = ', '.join([escape(a) for a in authors])
+            
+            # Truncate abstract
+            abstract = paper['summary'][:500]
+            if len(paper['summary']) > 500:
+                abstract += '...'
             
             html += f'''
-            <div class="paper-entry" style="margin-bottom: 2rem; padding: 1.5rem; background: #fafafa; border-radius: 8px; border: 1px solid #e5e5e5;">
-                <h3>{i}. {escape(paper['title'])}</h3>
-                <div class="priority-badge {priority_class}" style="display: inline-block; margin: 0.5rem 0;">
-                    {priority_text} (Score: {paper['relevance_score']:.2f})
+            <div class="paper-card">
+                <div class="paper-header">
+                    <h3 class="paper-title">{i}. {escape(paper['title'])}</h3>
+                    <span class="relevance-badge {relevance_class}">{relevance_text} ({paper['relevance_score']:.1f})</span>
                 </div>
-                <div class="paper-meta" style="margin: 1rem 0;">
-                    <span class="meta-item">👥 {', '.join([escape(a) for a in paper['authors'][:3]])}{' et al.' if len(paper['authors']) > 3 else ''}</span><br>
-                    <span class="meta-item">📁 {', '.join(paper['categories'])}</span><br>
-                    <span class="meta-item">🔗 <a href="{paper['arxiv_url']}" target="_blank">arXiv:{paper['id']}</a> | 
-                    <a href="{paper['pdf_url']}" target="_blank">PDF</a></span>
+                
+                <div class="paper-meta">
+                    <div class="meta-row">
+                        <span class="meta-label">Authors:</span>
+                        <span>{authors_str}</span>
+                    </div>
+                    <div class="meta-row">
+                        <span class="meta-label">Categories:</span>
+                        <span>{', '.join(paper['categories'])}</span>
+                    </div>
+                    <div class="meta-row">
+                        <span class="meta-label">Links:</span>
+                        <span>
+                            <a href="{paper['arxiv_url']}" target="_blank">arXiv:{paper['id']}</a> | 
+                            <a href="{paper['pdf_url']}" target="_blank">PDF</a>
+                        </span>
+                    </div>
                 </div>
-                <p style="color: #666; line-height: 1.6;">{escape(paper['summary'][:500])}{'...' if len(paper['summary']) > 500 else ''}</p>
-                {f'<p style="font-size: 0.9em; color: #888; font-style: italic;">Note: {escape(paper["comment"])}</p>' if paper.get('comment') else ''}
+                
+                <p class="paper-abstract">{escape(abstract)}</p>
+                {f'<div class="paper-comment">Note: {escape(paper["comment"])}</div>' if paper.get('comment') else ''}
             </div>
 '''
         
-        html += '''
+        html += f'''
         </div>
         
-        <footer class="card text-center" style="margin-top: 2rem;">
-            <p class="text-muted mb-0">Generated on ''' + datetime.now().strftime('%Y-%m-%d %H:%M:%S') + '''</p>
+        <footer class="footer">
+            <p>Generated on {datetime.now().strftime('%Y-%m-%d at %H:%M:%S')}</p>
+            <p>AICOE Research Library - AI Papers Daily Digest</p>
         </footer>
     </div>
 </body>
