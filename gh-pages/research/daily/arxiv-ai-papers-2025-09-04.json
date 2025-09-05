@@ -1,0 +1,378 @@
+[
+  {
+    "id": "2411.12736v2",
+    "title": "ACING: Actor-Critic for Instruction Learning in Black-Box LLMs",
+    "summary": "The effectiveness of Large Language Models (LLMs) in solving tasks depends\nsignificantly on the quality of their instructions, which often require\nsubstantial human effort to craft. This underscores the need for automated\ninstruction optimization. However, optimizing instructions is particularly\nchallenging when working with black-box LLMs, where model parameters and\ngradients are inaccessible. We introduce ACING, an actor-critic reinforcement\nlearning framework that formulates instruction optimization as a stateless,\ncontinuous-action problem, enabling exploration of infinite instruction spaces\nusing only black-box feedback. ACING automatically discovers prompts that\noutperform human-written prompts in 76% of instruction-induction tasks, with\ngains of up to 33 points and a 10-point median improvement over the best\nautomatic baseline in 33 tasks spanning instruction-induction, summarization,\nand chain-of-thought reasoning. Extensive ablations highlight its robustness\nand efficiency. An implementation of ACING is available at\nhttps://github.com/salmakh1/ACING.",
+    "authors": [
+      "Salma Kharrat",
+      "Fares Fourati",
+      "Marco Canini"
+    ],
+    "published": "2024-11-19T18:58:03Z",
+    "updated": "2025-09-04T17:56:24Z",
+    "categories": [
+      "cs.LG",
+      "cs.SY",
+      "cs.CL",
+      "math.OC",
+      "cs.AI",
+      "eess.SY"
+    ],
+    "primary_category": "cs.AI",
+    "pdf_url": "http://arxiv.org/pdf/2411.12736v2",
+    "arxiv_url": "http://arxiv.org/abs/2411.12736v2",
+    "comment": "Accepted at EMNLP 2025",
+    "relevance_score": 5.5
+  },
+  {
+    "id": "2509.04442v1",
+    "title": "Delta Activations: A Representation for Finetuned Large Language Models",
+    "summary": "The success of powerful open source Large Language Models (LLMs) has enabled\nthe community to create a vast collection of post-trained models adapted to\nspecific tasks and domains. However, navigating and understanding these models\nremains challenging due to inconsistent metadata and unstructured repositories.\nWe introduce Delta Activations, a method to represent finetuned models as\nvector embeddings by measuring shifts in their internal activations relative to\na base model. This representation allows for effective clustering by domain and\ntask, revealing structure in the model landscape. Delta Activations also\ndemonstrate desirable properties: it is robust across finetuning settings and\nexhibits an additive property when finetuning datasets are mixed. In addition,\nwe show that Delta Activations can embed tasks via few-shot finetuning, and\nfurther explore its use for model selection and merging. We hope Delta\nActivations can facilitate the practice of reusing publicly available models.\nCode is available at https://github.com/OscarXZQ/delta_activations.",
+    "authors": [
+      "Zhiqiu Xu",
+      "Amish Sethi",
+      "Mayur Naik",
+      "Ser-Nam Lim"
+    ],
+    "published": "2025-09-04T17:59:06Z",
+    "updated": "2025-09-04T17:59:06Z",
+    "categories": [
+      "cs.LG",
+      "cs.IR",
+      "cs.CL",
+      "cs.AI"
+    ],
+    "primary_category": "cs.AI",
+    "pdf_url": "http://arxiv.org/pdf/2509.04442v1",
+    "arxiv_url": "http://arxiv.org/abs/2509.04442v1",
+    "comment": null,
+    "relevance_score": 4.5
+  },
+  {
+    "id": "2509.04439v1",
+    "title": "ArcMemo: Abstract Reasoning Composition with Lifelong LLM Memory",
+    "summary": "While inference-time scaling enables LLMs to carry out increasingly long and\ncapable reasoning traces, the patterns and insights uncovered during these\ntraces are immediately discarded once the context window is reset for a new\nquery. External memory is a natural way to persist these discoveries, and\nrecent work has shown clear benefits for reasoning-intensive tasks. We see an\nopportunity to make such memories more broadly reusable and scalable by moving\nbeyond instance-based memory entries (e.g. exact query/response pairs, or\nsummaries tightly coupled with the original problem context) toward\nconcept-level memory: reusable, modular abstractions distilled from solution\ntraces and stored in natural language. For future queries, relevant concepts\nare selectively retrieved and integrated into the prompt, enabling test-time\ncontinual learning without weight updates. Our design introduces new strategies\nfor abstracting takeaways from rollouts and retrieving entries for new queries,\npromoting reuse and allowing memory to expand with additional experiences. On\nthe challenging ARC-AGI benchmark, our method yields a 7.5% relative gain over\na strong no-memory baseline with performance continuing to scale with inference\ncompute. We find abstract concepts to be the most consistent memory design,\noutscoring the baseline at all tested inference compute scales. Moreover, we\nconfirm that dynamically updating memory during test-time outperforms an\notherwise identical fixed memory setting with additional attempts, supporting\nthe hypothesis that solving more problems and abstracting more patterns to\nmemory enables further solutions in a form of self-improvement. Code available\nat https://github.com/matt-seb-ho/arc_memo.",
+    "authors": [
+      "Matthew Ho",
+      "Chen Si",
+      "Zhaoxiang Feng",
+      "Fangxu Yu",
+      "Zhijian Liu",
+      "Zhiting Hu",
+      "Lianhui Qin"
+    ],
+    "published": "2025-09-04T17:54:19Z",
+    "updated": "2025-09-04T17:54:19Z",
+    "categories": [
+      "cs.LG",
+      "cs.CL",
+      "cs.AI"
+    ],
+    "primary_category": "cs.AI",
+    "pdf_url": "http://arxiv.org/pdf/2509.04439v1",
+    "arxiv_url": "http://arxiv.org/abs/2509.04439v1",
+    "comment": null,
+    "relevance_score": 4.5
+  },
+  {
+    "id": "2509.04419v1",
+    "title": "Towards a Unified View of Large Language Model Post-Training",
+    "summary": "Two major sources of training data exist for post-training modern language\nmodels: online (model-generated rollouts) data, and offline (human or\nother-model demonstrations) data. These two types of data are typically used by\napproaches like Reinforcement Learning (RL) and Supervised Fine-Tuning (SFT),\nrespectively. In this paper, we show that these approaches are not in\ncontradiction, but are instances of a single optimization process. We derive a\nUnified Policy Gradient Estimator, and present the calculations of a wide\nspectrum of post-training approaches as the gradient of a common objective\nunder different data distribution assumptions and various bias-variance\ntradeoffs. The gradient estimator is constructed with four interchangeable\nparts: stabilization mask, reference policy denominator, advantage estimate,\nand likelihood gradient. Motivated by our theoretical findings, we propose\nHybrid Post-Training (HPT), an algorithm that dynamically selects different\ntraining signals. HPT is designed to yield both effective exploitation of\ndemonstration and stable exploration without sacrificing learned reasoning\npatterns. We provide extensive experiments and ablation studies to verify the\neffectiveness of our unified theoretical framework and HPT. Across six\nmathematical reasoning benchmarks and two out-of-distribution suites, HPT\nconsistently surpasses strong baselines across models of varying scales and\nfamilies.",
+    "authors": [
+      "Xingtai Lv",
+      "Yuxin Zuo",
+      "Youbang Sun",
+      "Hongyi Liu",
+      "Yuntian Wei",
+      "Zhekai Chen",
+      "Lixuan He",
+      "Xuekai Zhu",
+      "Kaiyan Zhang",
+      "Bingning Wang",
+      "Ning Ding",
+      "Bowen Zhou"
+    ],
+    "published": "2025-09-04T17:40:33Z",
+    "updated": "2025-09-04T17:40:33Z",
+    "categories": [
+      "cs.LG",
+      "cs.AI",
+      "cs.CL"
+    ],
+    "primary_category": "cs.AI",
+    "pdf_url": "http://arxiv.org/pdf/2509.04419v1",
+    "arxiv_url": "http://arxiv.org/abs/2509.04419v1",
+    "comment": null,
+    "relevance_score": 4.5
+  },
+  {
+    "id": "2509.01185v2",
+    "title": "Modular Techniques for Synthetic Long-Context Data Generation in   Language Model Training and Evaluation",
+    "summary": "The ability of large language models (LLMs) to process and reason over long\ntextual inputs is critical for a wide range of real-world applications.\nHowever, progress in this area is significantly constrained by the absence of\nhigh-quality, diverse, and verifiable long-context datasets suitable for both\ntraining and evaluation. This work introduces a modular, extensible framework\nfor synthetic long-context data generation via prompt-based interaction with\nLLMs. The framework supports multiple training and alignment objectives,\nincluding Supervised Fine-Tuning (SFT), Direct Preference Optimization (DPO),\nand Group Relative Policy Optimization (GRPO). It encompasses four core\ngeneration paradigms: multi-turn conversational dialogues, document-grounded\ninput-output pairs, verifiable instruction-response tasks, and long-context\nreasoning examples. Through templated prompting, a model-agnostic architecture,\nand metadata-enriched outputs, the proposed approach facilitates scalable,\ncontrollable, and purpose-aligned dataset creation for advancing long-context\ncapabilities in LLMs.",
+    "authors": [
+      "Seganrasan Subramanian",
+      "Abhigya Verma"
+    ],
+    "published": "2025-09-01T07:08:45Z",
+    "updated": "2025-09-04T17:22:16Z",
+    "categories": [
+      "cs.CL",
+      "cs.AI"
+    ],
+    "primary_category": "cs.AI",
+    "pdf_url": "http://arxiv.org/pdf/2509.01185v2",
+    "arxiv_url": "http://arxiv.org/abs/2509.01185v2",
+    "comment": "26 pages, 4 figures",
+    "relevance_score": 4.5
+  },
+  {
+    "id": "2509.04404v1",
+    "title": "No Thoughts Just AI: Biased LLM Recommendations Limit Human Agency in   Resume Screening",
+    "summary": "In this study, we conduct a resume-screening experiment (N=528) where people\ncollaborate with simulated AI models exhibiting race-based preferences (bias)\nto evaluate candidates for 16 high and low status occupations. Simulated AI\nbias approximates factual and counterfactual estimates of racial bias in\nreal-world AI systems. We investigate people's preferences for White, Black,\nHispanic, and Asian candidates (represented through names and affinity groups\non quality-controlled resumes) across 1,526 scenarios and measure their\nunconscious associations between race and status using implicit association\ntests (IATs), which predict discriminatory hiring decisions but have not been\ninvestigated in human-AI collaboration. When making decisions without AI or\nwith AI that exhibits no race-based preferences, people select all candidates\nat equal rates. However, when interacting with AI favoring a particular group,\npeople also favor those candidates up to 90% of the time, indicating a\nsignificant behavioral shift. The likelihood of selecting candidates whose\nidentities do not align with common race-status stereotypes can increase by 13%\nif people complete an IAT before conducting resume screening. Finally, even if\npeople think AI recommendations are low quality or not important, their\ndecisions are still vulnerable to AI bias under certain circumstances. This\nwork has implications for people's autonomy in AI-HITL scenarios, AI and work,\ndesign and evaluation of AI hiring systems, and strategies for mitigating bias\nin collaborative decision-making tasks. In particular, organizational and\nregulatory policy should acknowledge the complex nature of AI-HITL decision\nmaking when implementing these systems, educating people who use them, and\ndetermining which are subject to oversight.",
+    "authors": [
+      "Kyra Wilson",
+      "Mattea Sim",
+      "Anna-Maria Gueorguieva",
+      "Aylin Caliskan"
+    ],
+    "published": "2025-09-04T17:16:26Z",
+    "updated": "2025-09-04T17:16:26Z",
+    "categories": [
+      "cs.CY",
+      "cs.AI",
+      "cs.CL",
+      "cs.HC",
+      "K.4.2"
+    ],
+    "primary_category": "cs.AI",
+    "pdf_url": "http://arxiv.org/pdf/2509.04404v1",
+    "arxiv_url": "http://arxiv.org/abs/2509.04404v1",
+    "comment": "Published in Proceedings of the 2025 AAAI/ACM Conference on AI,\n  Ethics, and Society; code available at\n  https://github.com/kyrawilson/No-Thoughts-Just-AI",
+    "relevance_score": 3.5
+  },
+  {
+    "id": "2509.04398v1",
+    "title": "IPA: An Information-Preserving Input Projection Framework for Efficient   Foundation Model Adaptation",
+    "summary": "Parameter-efficient fine-tuning (PEFT) methods, such as LoRA, reduce\nadaptation cost by injecting low-rank updates into pretrained weights. However,\nLoRA's down-projection is randomly initialized and data-agnostic, discarding\npotentially useful information. Prior analyses show that this projection\nchanges little during training, while the up-projection carries most of the\nadaptation, making the random input compression a performance bottleneck. We\npropose IPA, a feature-aware projection framework that explicitly preserves\ninformation in the reduced hidden space. In the linear case, we instantiate IPA\nwith algorithms approximating top principal components, enabling efficient\nprojector pretraining with negligible inference overhead. Across language and\nvision benchmarks, IPA consistently improves over LoRA and DoRA, achieving on\naverage 1.5 points higher accuracy on commonsense reasoning and 2.3 points on\nVTAB-1k, while matching full LoRA performance with roughly half the trainable\nparameters when the projection is frozen.",
+    "authors": [
+      "Yuan Yin",
+      "Shashanka Venkataramanan",
+      "Tuan-Hung Vu",
+      "Andrei Bursuc",
+      "Matthieu Cord"
+    ],
+    "published": "2025-09-04T17:10:01Z",
+    "updated": "2025-09-04T17:10:01Z",
+    "categories": [
+      "cs.LG",
+      "cs.AI"
+    ],
+    "primary_category": "cs.AI",
+    "pdf_url": "http://arxiv.org/pdf/2509.04398v1",
+    "arxiv_url": "http://arxiv.org/abs/2509.04398v1",
+    "comment": null,
+    "relevance_score": 3.5
+  },
+  {
+    "id": "2505.05118v2",
+    "title": "Enhancing Text2Cypher with Schema Filtering",
+    "summary": "Knowledge graphs represent complex data using nodes, relationships, and\nproperties. Cypher, a powerful query language for graph databases, enables\nefficient modeling and querying. Recent advancements in large language models\nallow translation of natural language questions into Cypher queries -\nText2Cypher. A common approach is incorporating database schema into prompts.\nHowever, complex schemas can introduce noise, increase hallucinations, and\nraise computational costs. Schema filtering addresses these challenges by\nincluding only relevant schema elements, improving query generation while\nreducing token costs. This work explores various schema filtering methods for\nText2Cypher task and analyzes their impact on token length, performance, and\ncost. Results show that schema filtering effectively optimizes Text2Cypher,\nespecially for smaller models. Consistent with prior research, we find that\nlarger models benefit less from schema filtering due to their longer context\ncapabilities. However, schema filtering remains valuable for both larger and\nsmaller models in cost reduction.",
+    "authors": [
+      "Makbule Gulcin Ozsoy"
+    ],
+    "published": "2025-05-08T10:42:20Z",
+    "updated": "2025-09-04T17:52:23Z",
+    "categories": [
+      "cs.DB",
+      "cs.LG"
+    ],
+    "primary_category": "cs.LG",
+    "pdf_url": "http://arxiv.org/pdf/2505.05118v2",
+    "arxiv_url": "http://arxiv.org/abs/2505.05118v2",
+    "comment": null,
+    "relevance_score": 3.5
+  },
+  {
+    "id": "2507.12964v5",
+    "title": "Demographic-aware fine-grained classification of pediatric wrist   fractures",
+    "summary": "Wrist pathologies are frequently observed, particularly among children who\nconstitute the majority of fracture cases. Computer vision presents a promising\navenue, contingent upon the availability of extensive datasets, a notable\nchallenge in medical imaging. Therefore, reliance solely on one modality, such\nas images, proves inadequate, especially in an era of diverse and plentiful\ndata types. This study addresses the problem using a multifaceted approach:\nframing it as a fine-grained recognition task, fusing patient metadata with\nX-rays, and leveraging weights from a separate fine-grained dataset rather than\nfrom a coarse-grained dataset like ImageNet. Unlike prior work, this is the\nfirst application of metadata integration for wrist pathology recognition. Our\nresults show that combining fine-grained transformer approach, fine-grained\npre-training, and metadata integration improves diagnostic accuracy by 2% on\nsmall custom curated dataset and over 10% on a larger fracture dataset.",
+    "authors": [
+      "Ammar Ahmed",
+      "Ali Shariq Imran",
+      "Zenun Kastrati",
+      "Sher Muhammad Daudpota"
+    ],
+    "published": "2025-07-17T10:03:57Z",
+    "updated": "2025-09-04T16:55:10Z",
+    "categories": [
+      "cs.CV",
+      "cs.AI",
+      "cs.LG"
+    ],
+    "primary_category": "cs.AI",
+    "pdf_url": "http://arxiv.org/pdf/2507.12964v5",
+    "arxiv_url": "http://arxiv.org/abs/2507.12964v5",
+    "comment": null,
+    "relevance_score": 2.5
+  },
+  {
+    "id": "2509.04430v1",
+    "title": "Unveiling the Role of Data Uncertainty in Tabular Deep Learning",
+    "summary": "Recent advancements in tabular deep learning have demonstrated exceptional\npractical performance, yet the field often lacks a clear understanding of why\nthese techniques actually succeed. To address this gap, our paper highlights\nthe importance of the concept of data uncertainty for explaining the\neffectiveness of the recent tabular DL methods. In particular, we reveal that\nthe success of many beneficial design choices in tabular DL, such as numerical\nfeature embeddings, retrieval-augmented models and advanced ensembling\nstrategies, can be largely attributed to their implicit mechanisms for managing\nhigh data uncertainty. By dissecting these mechanisms, we provide a unifying\nunderstanding of the recent performance improvements. Furthermore, the insights\nderived from this data-uncertainty perspective directly allowed us to develop\nmore effective numerical feature embeddings as an immediate practical outcome\nof our analysis. Overall, our work paves the way to foundational understanding\nof the benefits introduced by modern tabular methods that results in the\nconcrete advancements of existing techniques and outlines future research\ndirections for tabular DL.",
+    "authors": [
+      "Nikolay Kartashev",
+      "Ivan Rubachev",
+      "Artem Babenko"
+    ],
+    "published": "2025-09-04T17:49:59Z",
+    "updated": "2025-09-04T17:49:59Z",
+    "categories": [
+      "cs.LG"
+    ],
+    "primary_category": "cs.LG",
+    "pdf_url": "http://arxiv.org/pdf/2509.04430v1",
+    "arxiv_url": "http://arxiv.org/abs/2509.04430v1",
+    "comment": null,
+    "relevance_score": 2.5
+  },
+  {
+    "id": "2509.04449v1",
+    "title": "ChronoGraph: A Real-World Graph-Based Multivariate Time Series Dataset",
+    "summary": "We present ChronoGraph, a graph-structured multivariate time series\nforecasting dataset built from real-world production microservices. Each node\nis a service that emits a multivariate stream of system-level performance\nmetrics, capturing CPU, memory, and network usage patterns, while directed\nedges encode dependencies between services. The primary task is forecasting\nfuture values of these signals at the service level. In addition, ChronoGraph\nprovides expert-annotated incident windows as anomaly labels, enabling\nevaluation of anomaly detection methods and assessment of forecast robustness\nduring operational disruptions. Compared to existing benchmarks from industrial\ncontrol systems or traffic and air-quality domains, ChronoGraph uniquely\ncombines (i) multivariate time series, (ii) an explicit, machine-readable\ndependency graph, and (iii) anomaly labels aligned with real incidents. We\nreport baseline results spanning forecasting models, pretrained time-series\nfoundation models, and standard anomaly detectors. ChronoGraph offers a\nrealistic benchmark for studying structure-aware forecasting and incident-aware\nevaluation in microservice systems.",
+    "authors": [
+      "Adrian Catalin Lutu",
+      "Ioana Pintilie",
+      "Elena Burceanu",
+      "Andrei Manolache"
+    ],
+    "published": "2025-09-04T17:59:52Z",
+    "updated": "2025-09-04T17:59:52Z",
+    "categories": [
+      "cs.LG",
+      "cs.AI"
+    ],
+    "primary_category": "cs.AI",
+    "pdf_url": "http://arxiv.org/pdf/2509.04449v1",
+    "arxiv_url": "http://arxiv.org/abs/2509.04449v1",
+    "comment": null,
+    "relevance_score": 1.5
+  },
+  {
+    "id": "2509.04450v1",
+    "title": "Virtual Fitting Room: Generating Arbitrarily Long Videos of Virtual   Try-On from a Single Image -- Technical Preview",
+    "summary": "We introduce the Virtual Fitting Room (VFR), a novel video generative model\nthat produces arbitrarily long virtual try-on videos. Our VFR models long video\ngeneration tasks as an auto-regressive, segment-by-segment generation process,\neliminating the need for resource-intensive generation and lengthy video data,\nwhile providing the flexibility to generate videos of arbitrary length. The key\nchallenges of this task are twofold: ensuring local smoothness between adjacent\nsegments and maintaining global temporal consistency across different segments.\nTo address these challenges, we propose our VFR framework, which ensures\nsmoothness through a prefix video condition and enforces consistency with the\nanchor video -- a 360-degree video that comprehensively captures the human's\nwholebody appearance. Our VFR generates minute-scale virtual try-on videos with\nboth local smoothness and global temporal consistency under various motions,\nmaking it a pioneering work in long virtual try-on video generation.",
+    "authors": [
+      "Jun-Kun Chen",
+      "Aayush Bansal",
+      "Minh Phuoc Vo",
+      "Yu-Xiong Wang"
+    ],
+    "published": "2025-09-04T17:59:55Z",
+    "updated": "2025-09-04T17:59:55Z",
+    "categories": [
+      "cs.CV",
+      "cs.LG"
+    ],
+    "primary_category": "cs.LG",
+    "pdf_url": "http://arxiv.org/pdf/2509.04450v1",
+    "arxiv_url": "http://arxiv.org/abs/2509.04450v1",
+    "comment": "Project Page: https://immortalco.github.io/VirtualFittingRoom/",
+    "relevance_score": 1.5
+  },
+  {
+    "id": "2509.02565v2",
+    "title": "Understanding sparse autoencoder scaling in the presence of feature   manifolds",
+    "summary": "Sparse autoencoders (SAEs) model the activations of a neural network as\nlinear combinations of sparsely occurring directions of variation (latents).\nThe ability of SAEs to reconstruct activations follows scaling laws w.r.t. the\nnumber of latents. In this work, we adapt a capacity-allocation model from the\nneural scaling literature (Brill, 2024) to understand SAE scaling, and in\nparticular, to understand how \"feature manifolds\" (multi-dimensional features)\ninfluence scaling behavior. Consistent with prior work, the model recovers\ndistinct scaling regimes. Notably, in one regime, feature manifolds have the\npathological effect of causing SAEs to learn far fewer features in data than\nthere are latents in the SAE. We provide some preliminary discussion on whether\nor not SAEs are in this pathological regime in the wild.",
+    "authors": [
+      "Eric J. Michaud",
+      "Liv Gorton",
+      "Tom McGrath"
+    ],
+    "published": "2025-09-02T17:59:50Z",
+    "updated": "2025-09-04T17:55:36Z",
+    "categories": [
+      "cs.LG"
+    ],
+    "primary_category": "cs.LG",
+    "pdf_url": "http://arxiv.org/pdf/2509.02565v2",
+    "arxiv_url": "http://arxiv.org/abs/2509.02565v2",
+    "comment": "13 pages, 8 figures, short workshop submission",
+    "relevance_score": 1.5
+  },
+  {
+    "id": "2509.04441v1",
+    "title": "DEXOP: A Device for Robotic Transfer of Dexterous Human Manipulation",
+    "summary": "We introduce perioperation, a paradigm for robotic data collection that\nsensorizes and records human manipulation while maximizing the transferability\nof the data to real robots. We implement this paradigm in DEXOP, a passive hand\nexoskeleton designed to maximize human ability to collect rich sensory (vision\n+ tactile) data for diverse dexterous manipulation tasks in natural\nenvironments. DEXOP mechanically connects human fingers to robot fingers,\nproviding users with direct contact feedback (via proprioception) and mirrors\nthe human hand pose to the passive robot hand to maximize the transfer of\ndemonstrated skills to the robot. The force feedback and pose mirroring make\ntask demonstrations more natural for humans compared to teleoperation,\nincreasing both speed and accuracy. We evaluate DEXOP across a range of\ndexterous, contact-rich tasks, demonstrating its ability to collect\nhigh-quality demonstration data at scale. Policies learned with DEXOP data\nsignificantly improve task performance per unit time of data collection\ncompared to teleoperation, making DEXOP a powerful tool for advancing robot\ndexterity. Our project page is at https://dex-op.github.io.",
+    "authors": [
+      "Hao-Shu Fang",
+      "Branden Romero",
+      "Yichen Xie",
+      "Arthur Hu",
+      "Bo-Ruei Huang",
+      "Juan Alvarez",
+      "Matthew Kim",
+      "Gabriel Margolis",
+      "Kavya Anbarasu",
+      "Masayoshi Tomizuka",
+      "Edward Adelson",
+      "Pulkit Agrawal"
+    ],
+    "published": "2025-09-04T17:57:13Z",
+    "updated": "2025-09-04T17:57:13Z",
+    "categories": [
+      "cs.RO",
+      "cs.AI",
+      "cs.CV",
+      "cs.HC"
+    ],
+    "primary_category": "cs.AI",
+    "pdf_url": "http://arxiv.org/pdf/2509.04441v1",
+    "arxiv_url": "http://arxiv.org/abs/2509.04441v1",
+    "comment": "project page: https://dex-op.github.io",
+    "relevance_score": 0.5
+  },
+  {
+    "id": "2509.04445v1",
+    "title": "Towards Cognitively-Faithful Decision-Making Models to Improve AI   Alignment",
+    "summary": "Recent AI work trends towards incorporating human-centric objectives, with\nthe explicit goal of aligning AI models to personal preferences and societal\nvalues. Using standard preference elicitation methods, researchers and\npractitioners build models of human decisions and judgments, which are then\nused to align AI behavior with that of humans. However, models commonly used in\nsuch elicitation processes often do not capture the true cognitive processes of\nhuman decision making, such as when people use heuristics to simplify\ninformation associated with a decision problem. As a result, models learned\nfrom people's decisions often do not align with their cognitive processes, and\ncan not be used to validate the learning framework for generalization to other\ndecision-making tasks. To address this limitation, we take an axiomatic\napproach to learning cognitively faithful decision processes from pairwise\ncomparisons. Building on the vast literature characterizing the cognitive\nprocesses that contribute to human decision-making, and recent work\ncharacterizing such processes in pairwise comparison tasks, we define a class\nof models in which individual features are first processed and compared across\nalternatives, and then the processed features are then aggregated via a fixed\nrule, such as the Bradley-Terry rule. This structured processing of information\nensures such models are realistic and feasible candidates to represent\nunderlying human decision-making processes. We demonstrate the efficacy of this\nmodeling approach in learning interpretable models of human decision making in\na kidney allocation task, and show that our proposed models match or surpass\nthe accuracy of prior models of human pairwise decision-making.",
+    "authors": [
+      "Cyrus Cousins",
+      "Vijay Keswani",
+      "Vincent Conitzer",
+      "Hoda Heidari",
+      "Jana Schaich Borg",
+      "Walter Sinnott-Armstrong"
+    ],
+    "published": "2025-09-04T17:59:29Z",
+    "updated": "2025-09-04T17:59:29Z",
+    "categories": [
+      "cs.LG"
+    ],
+    "primary_category": "cs.LG",
+    "pdf_url": "http://arxiv.org/pdf/2509.04445v1",
+    "arxiv_url": "http://arxiv.org/abs/2509.04445v1",
+    "comment": null,
+    "relevance_score": 0.5
+  },
+  {
+    "id": "2509.04422v1",
+    "title": "Echo State Networks as State-Space Models: A Systems Perspective",
+    "summary": "Echo State Networks (ESNs) are typically presented as efficient,\nreadout-trained recurrent models, yet their dynamics and design are often\nguided by heuristics rather than first principles. We recast ESNs explicitly as\nstate-space models (SSMs), providing a unified systems-theoretic account that\nlinks reservoir computing with classical identification and modern kernelized\nSSMs. First, we show that the echo-state property is an instance of\ninput-to-state stability for a contractive nonlinear SSM and derive verifiable\nconditions in terms of leak, spectral scaling, and activation Lipschitz\nconstants. Second, we develop two complementary mappings: (i) small-signal\nlinearizations that yield locally valid LTI SSMs with interpretable poles and\nmemory horizons; and (ii) lifted/Koopman random-feature expansions that render\nthe ESN a linear SSM in an augmented state, enabling transfer-function and\nconvolutional-kernel analyses. This perspective yields frequency-domain\ncharacterizations of memory spectra and clarifies when ESNs emulate structured\nSSM kernels. Third, we cast teacher forcing as state estimation and propose\nKalman/EKF-assisted readout learning, together with EM for hyperparameters\n(leak, spectral radius, process/measurement noise) and a hybrid subspace\nprocedure for spectral shaping under contraction constraints.",
+    "authors": [
+      "Pradeep Singh",
+      "Balasubramanian Raman"
+    ],
+    "published": "2025-09-04T17:42:03Z",
+    "updated": "2025-09-04T17:42:03Z",
+    "categories": [
+      "cs.LG",
+      "93C10, 68T07, 93C05, 93E11, 93B30, 93B05, 93B07, 62M10",
+      "I.2.6; I.5.1; I.6.5; I.6.4; G.3"
+    ],
+    "primary_category": "cs.LG",
+    "pdf_url": "http://arxiv.org/pdf/2509.04422v1",
+    "arxiv_url": "http://arxiv.org/abs/2509.04422v1",
+    "comment": "27 pages, 1 figure",
+    "relevance_score": 0.5
+  }
+]
