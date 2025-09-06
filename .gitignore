@@ -1,3 +1,9 @@
+# Private directories - NEVER commit
+000-private/
+**/000-private/
+private/
+**/private/
+
 # Python
 __pycache__/
 *.py[cod]
