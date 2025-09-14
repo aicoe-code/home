@@ -77,6 +77,37 @@ jobs:
             --exclude "Private/**" \
             "$SRC"/ "$DST"/
 
+      - name: Fingerprint assets (css/js)
+        run: |
+          set -euo pipefail
+          shopt -s globstar nullglob
+          # Find css/js that are not already fingerprinted like name.<hash>.ext
+          mapfile -t FILES < <(find docs -type f \( -name '*.css' -o -name '*.js' \) \
+            -not -regex '.*\.[0-9a-fA-F]\{8\}\.(css|js)$')
+          if [ ${#FILES[@]} -eq 0 ]; then
+            echo "No assets to fingerprint."
+          else
+            for f in "${FILES[@]}"; do
+              dir=$(dirname "$f"); file=$(basename "$f")
+              base=${file%.*}; ext=${file##*.}
+              hash=$(sha256sum "$f" | cut -c1-8)
+              new="$dir/$base.$hash.$ext"
+              if [ -f "$new" ]; then
+                # Same content as an existing hashed file; remove the plain one
+                rm -f "$f"
+              else
+                mv "$f" "$new"
+              fi
+              # Update references in all HTML files under docs
+              find docs -type f -name '*.html' -print0 | xargs -0 -I{} sed -i.bak "s#\b${file}\b#${base}.${hash}.${ext}#g" {}
+            done
+            # Clean up sed backup files
+            find docs -type f -name '*.bak' -delete || true
+          fi
+
+      - name: Compute changes
+        id: changes
+        run: |
           CHANGED=$(git status --porcelain=v1 docs | wc -l | tr -d ' ')
           echo "changed=$CHANGED" >> "$GITHUB_OUTPUT"
           echo "Changed files in docs/: $CHANGED"
@@ -86,7 +117,7 @@ jobs:
           git status --porcelain=v1 docs || true
 
       - name: Commit changes
-        if: steps.sync.outputs.changed != '0' && steps.flags.outputs.dry_run != 'true'
+        if: steps.changes.outputs.changed != '0' && steps.flags.outputs.dry_run != 'true'
         run: |
           git config user.name "${GITHUB_ACTOR}"
           git config user.email "${GITHUB_ACTOR}@users.noreply.github.com"
@@ -102,7 +133,7 @@ jobs:
           git commit -m "$CM"
 
       - name: Push changes
-        if: steps.sync.outputs.changed != '0' && steps.flags.outputs.dry_run != 'true'
+        if: steps.changes.outputs.changed != '0' && steps.flags.outputs.dry_run != 'true'
         run: |
           git push origin HEAD:main
 
@@ -111,7 +142,7 @@ jobs:
           {
             echo "## Publish Summary";
             echo "- Dry run: ${{ steps.flags.outputs.dry_run }}";
-            echo "- Changed files: ${{ steps.sync.outputs.changed }}";
+            echo "- Changed files: ${{ steps.changes.outputs.changed }}";
             if [ "${{ steps.flags.outputs.dry_run }}" = "true" ]; then
               echo "- No commit or push performed.";
             fi
