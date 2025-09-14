@@ -77,33 +77,26 @@ jobs:
             --exclude "Private/**" \
             "$SRC"/ "$DST"/
 
-      - name: Fingerprint assets (css/js)
+      - name: Version assets (query param)
         run: |
           set -euo pipefail
-          shopt -s globstar nullglob
-          # Find css/js that are not already fingerprinted like name.<hash>.ext
-          mapfile -t FILES < <(find docs -type f \( -name '*.css' -o -name '*.js' \) \
-            -not -regex '.*\.[0-9a-fA-F]\{8\}\.(css|js)$')
-          if [ ${#FILES[@]} -eq 0 ]; then
-            echo "No assets to fingerprint."
-          else
-            for f in "${FILES[@]}"; do
-              dir=$(dirname "$f"); file=$(basename "$f")
-              base=${file%.*}; ext=${file##*.}
-              hash=$(sha256sum "$f" | cut -c1-8)
-              new="$dir/$base.$hash.$ext"
-              if [ -f "$new" ]; then
-                # Same content as an existing hashed file; remove the plain one
-                rm -f "$f"
-              else
-                mv "$f" "$new"
-              fi
-              # Update references in all HTML files under docs
-              find docs -type f -name '*.html' -print0 | xargs -0 -I{} sed -i.bak "s#\b${file}\b#${base}.${hash}.${ext}#g" {}
-            done
-            # Clean up sed backup files
-            find docs -type f -name '*.bak' -delete || true
-          fi
+          VERSION=$(git rev-parse --short=8 HEAD)
+          python3 - << 'PY'
+import os, re, subprocess
+version = subprocess.check_output(['git','rev-parse','--short=8','HEAD']).decode().strip()
+pat = re.compile(r'((?:href|src)=["\'])([^"\']+\.(?:css|js))(?:\?v=[^"\']*)?(["\'])')
+for root, _, files in os.walk('docs'):
+    for fn in files:
+        if not fn.endswith('.html'):
+            continue
+        p = os.path.join(root, fn)
+        with open(p, 'r', encoding='utf-8') as f:
+            s = f.read()
+        s2 = pat.sub(lambda m: f"{m.group(1)}{m.group(2)}?v={version}{m.group(3)}", s)
+        if s2 != s:
+            with open(p, 'w', encoding='utf-8') as f:
+                f.write(s2)
+PY
 
       - name: Compute changes
         id: changes
