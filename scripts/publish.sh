@@ -5,12 +5,13 @@ set -euo pipefail
 
 usage() {
   cat <<USAGE
-Usage: $(basename "$0") [-n] [-m "commit message"] [-b]
+Usage: $(basename "$0") [-n] [-m "commit message"] [-b] [-s <source_dir>]
 
 Options:
   -n               Dry-run (show what would change, no commit)
   -m "message"     Commit message to use when publishing
   -b               Bootstrap: copy current ./docs into ./Private (no delete)
+  -s <source_dir>  Source directory to publish from (default: auto-detect)
 
 Behavior:
   - Syncs ./Private -> ./docs using rsync
@@ -22,11 +23,13 @@ USAGE
 DRY_RUN=0
 COMMIT_MSG="site: publish updates from Private/"
 BOOTSTRAP=0
-while getopts ":nm:bh" opt; do
+SRC_DIR=""
+while getopts ":nm:bs:h" opt; do
   case $opt in
     n) DRY_RUN=1 ;;
     m) COMMIT_MSG=$OPTARG ;;
     b) BOOTSTRAP=1 ;;
+    s) SRC_DIR=$OPTARG ;;
     h) usage; exit 0 ;;
     :) echo "Error: -$OPTARG requires an argument" >&2; usage; exit 2 ;;
     \?) echo "Error: invalid option -$OPTARG" >&2; usage; exit 2 ;;
@@ -36,31 +39,42 @@ done
 ROOT_DIR=$(git rev-parse --show-toplevel 2>/dev/null || pwd)
 cd "$ROOT_DIR"
 
-if [ ! -d Private ]; then
-  echo "./Private not found. Creating it now..."
-  mkdir -p Private
+if [ -z "$SRC_DIR" ]; then
+  if [ -d Private/00-Public_site ]; then
+    SRC_DIR="Private/00-Public_site"
+  elif [ -d Private ]; then
+    SRC_DIR="Private"
+  else
+    SRC_DIR="Private"
+  fi
+fi
+
+if [ ! -d "$SRC_DIR" ]; then
+  echo "Source directory '$SRC_DIR' not found. Creating it now..."
+  mkdir -p "$SRC_DIR"
 fi
 
 if [ ! -d docs ]; then
   mkdir -p docs
 fi
 
-if [ ! -f Private/index.html ]; then
-  echo "Warning: ./Private/index.html not found. Pages may not have a homepage."
+if [ ! -f "$SRC_DIR/index.html" ]; then
+  echo "Warning: $SRC_DIR/index.html not found. Pages may not have a homepage."
 fi
 
 RSYNC_FLAGS=("-av" "--delete" \
   "--exclude" ".DS_Store" \
   "--exclude" ".git*" \
   "--exclude" "x_*" \
+  "--exclude" "Private/**" \
   "--exclude" "_drafts/**" \
   "--exclude" "README.md")
 
 if [ "$BOOTSTRAP" -eq 1 ]; then
-  echo "> Bootstrapping: copying ./docs into ./Private (no deletions)"
+  echo "> Bootstrapping: copying ./docs into $SRC_DIR (no deletions)"
   if [ -d docs ]; then
-    rsync -av docs/ Private/
-    echo "> Bootstrap complete. You can now edit files in ./Private."
+    rsync -av docs/ "$SRC_DIR"/
+    echo "> Bootstrap complete. You can now edit files in $SRC_DIR."
     exit 0
   else
     echo "Warning: ./docs does not exist yet; nothing to bootstrap."
@@ -69,12 +83,12 @@ if [ "$BOOTSTRAP" -eq 1 ]; then
 fi
 
 if [ "$DRY_RUN" -eq 1 ]; then
-  echo "> Dry-run: showing planned changes from Private -> docs"
-  rsync --dry-run "${RSYNC_FLAGS[@]}" Private/ docs/
+  echo "> Dry-run: showing planned changes from $SRC_DIR -> docs"
+  rsync --dry-run "${RSYNC_FLAGS[@]}" "$SRC_DIR"/ docs/
   exit 0
 fi
 
-rsync "${RSYNC_FLAGS[@]}" Private/ docs/
+rsync "${RSYNC_FLAGS[@]}" "$SRC_DIR"/ docs/
 
 if git -C "$ROOT_DIR" diff --quiet -- docs; then
   echo "No changes detected in docs/. Nothing to commit."
