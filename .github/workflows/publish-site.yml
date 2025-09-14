@@ -1,0 +1,91 @@
+name: Publish Site
+
+on:
+  workflow_dispatch:
+    inputs:
+      commit_message:
+        description: 'Commit message for publishing'
+        required: false
+        default: 'site: publish from Private/00-Public_site'
+        type: string
+      dry_run:
+        description: 'Dry run (no commit/push)'
+        required: false
+        default: false
+        type: boolean
+
+permissions:
+  contents: write
+
+concurrency:
+  group: publish-site
+  cancel-in-progress: false
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 0
+
+      - name: Verify source directory
+        run: |
+          set -euo pipefail
+          if [ ! -d "Private/00-Public_site" ]; then
+            echo "Source directory 'Private/00-Public_site' not found in repo." >&2
+            echo "Either create it or update the workflow to point elsewhere." >&2
+            exit 1
+          fi
+
+      - name: Sync Private -> docs
+        id: sync
+        run: |
+          set -euo pipefail
+          SRC="Private/00-Public_site"
+          DST="docs"
+          mkdir -p "$DST"
+
+          rsync -av --delete \
+            --exclude ".DS_Store" \
+            --exclude ".git*" \
+            --exclude "x_*" \
+            --exclude "_drafts/**" \
+            --exclude "README.md" \
+            --exclude "Private/**" \
+            "$SRC"/ "$DST"/
+
+          CHANGED=$(git status --porcelain=v1 docs | wc -l | tr -d ' ')
+          echo "changed=$CHANGED" >> "$GITHUB_OUTPUT"
+          echo "Changed files in docs/: $CHANGED"
+
+      - name: Show changes
+        run: |
+          git status --porcelain=v1 docs || true
+
+      - name: Commit changes
+        if: steps.sync.outputs.changed != '0' && inputs.dry_run != true
+        run: |
+          git config user.name "${GITHUB_ACTOR}"
+          git config user.email "${GITHUB_ACTOR}@users.noreply.github.com"
+          git add docs
+          git commit -m "${{ inputs.commit_message }}"
+
+      - name: Push changes
+        if: steps.sync.outputs.changed != '0' && inputs.dry_run != true
+        run: |
+          git push origin HEAD:main
+
+      - name: Summary
+        run: |
+          {
+            echo "## Publish Summary";
+            echo "- Dry run: ${{ inputs.dry_run }}";
+            echo "- Changed files: ${{ steps.sync.outputs.changed }}";
+            if [ "${{ inputs.dry_run }}" = "true" ]; then
+              echo "- No commit or push performed.";
+            fi
+          } >> "$GITHUB_STEP_SUMMARY"
+
