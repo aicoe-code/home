@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>About</title>
+    <meta name="description" content="About this site" />
+    <link rel="stylesheet" href="styles.8d4720ec.css" />
+  </head>
+  <body>
+    <header class="site-header">
+      <h1>About</h1>
+      <nav class="nav">
+        <a href="index.html">Home</a>
+        <a href="research.html">Research</a>
+        <a href="about.html" aria-current="page">About</a>
+      </nav>
+    </header>
+
+    <main class="container">
+      <section>
+        <h2>Purpose</h2>
+        <p>The AICOE site helps teams understand, design, build, deploy, and operate AI solutions safely and effectively. It curates opinionated guidance, reusable patterns, and reference assets that reduce time‑to‑value while promoting good engineering and governance.</p>
+      </section>
+
+      <section>
+        <h2>Audience</h2>
+        <ul>
+          <li>Practitioners: data/ML/software/platform engineers</li>
+          <li>Decision makers: product, delivery, and technical leads</li>
+          <li>Enablers: security, risk/compliance, architecture boards</li>
+        </ul>
+      </section>
+
+      <section>
+        <h2>How This Site Publishes</h2>
+        <ol>
+          <li>Content is authored in <code>Private/00-Public_site/</code> (tracked in Git).</li>
+          <li>Drafts use the <code>x_</code> prefix and are excluded from publishing.</li>
+          <li>On push to <code>main</code>, a workflow syncs to <code>docs/</code>, fingerprints CSS/JS filenames by content hash, updates HTML references, and commits the result.</li>
+          <li>GitHub Pages serves the site from <code>docs/</code>.</li>
+        </ol>
+        <p>Tip: In source HTML, reference assets by their plain names (e.g., <code>styles.8d4720ec.css</code>); the workflow rewrites them to hashed names during publish.</p>
+      </section>
+
+      <section>
+        <h2>Writing Guidelines</h2>
+        <ul>
+          <li>Be direct and practical; show the minimum that works, then extensions.</li>
+          <li>Use semantic headings, alt text for images, and accessible color contrast.</li>
+          <li>Each guide should include prerequisites, exact steps, validation, and cleanup.</li>
+          <li>Keep secrets out of the repo; reference environment variables or vaults instead.</li>
+        </ul>
+      </section>
+
+      <section>
+        <h2>Contribute</h2>
+        <p>Open a PR or push small, focused commits to <code>main</code>. For substantive guidance, request a second reviewer (content + technical). Prefer canonical sources and note version/date where relevant.</p>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <p>© <span id="year"></span> Your Project</p>
+    </footer>
+
+    <script>
+      document.getElementById('year').textContent = new Date().getFullYear();
+    </script>
+  </body>
+  </html>
