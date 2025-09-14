@@ -1,6 +1,10 @@
 name: Publish Site
 
 on:
+  push:
+    branches: [ main ]
+    paths:
+      - 'Private/00-Public_site/**'
   workflow_dispatch:
     inputs:
       commit_message:
@@ -30,6 +34,22 @@ jobs:
         with:
           ref: main
           fetch-depth: 0
+
+      - name: Compute flags
+        id: flags
+        run: |
+          set -euo pipefail
+          # Determine dry_run from workflow_dispatch input if present, else false
+          DRY_RUN=false
+          if [ "$GITHUB_EVENT_NAME" = "workflow_dispatch" ]; then
+            if command -v jq >/dev/null 2>&1; then
+              DRY_RUN=$(jq -r '.inputs.dry_run // false' "$GITHUB_EVENT_PATH")
+            else
+              # Fallback if jq is not available
+              DRY_RUN=false
+            fi
+          fi
+          echo "dry_run=$DRY_RUN" >> "$GITHUB_OUTPUT"
 
       - name: Verify source directory
         run: |
@@ -66,15 +86,23 @@ jobs:
           git status --porcelain=v1 docs || true
 
       - name: Commit changes
-        if: steps.sync.outputs.changed != '0' && inputs.dry_run != true
+        if: steps.sync.outputs.changed != '0' && steps.flags.outputs.dry_run != 'true'
         run: |
           git config user.name "${GITHUB_ACTOR}"
           git config user.email "${GITHUB_ACTOR}@users.noreply.github.com"
           git add docs
-          git commit -m "${{ inputs.commit_message }}"
+          if command -v jq >/dev/null 2>&1; then
+            CM=$(jq -r '.inputs.commit_message // empty' "$GITHUB_EVENT_PATH")
+          else
+            CM=""
+          fi
+          if [ -z "$CM" ] || [ "$CM" = "null" ]; then
+            CM='site: publish from Private/00-Public_site'
+          fi
+          git commit -m "$CM"
 
       - name: Push changes
-        if: steps.sync.outputs.changed != '0' && inputs.dry_run != true
+        if: steps.sync.outputs.changed != '0' && steps.flags.outputs.dry_run != 'true'
         run: |
           git push origin HEAD:main
 
@@ -82,10 +110,9 @@ jobs:
         run: |
           {
             echo "## Publish Summary";
-            echo "- Dry run: ${{ inputs.dry_run }}";
+            echo "- Dry run: ${{ steps.flags.outputs.dry_run }}";
             echo "- Changed files: ${{ steps.sync.outputs.changed }}";
-            if [ "${{ inputs.dry_run }}" = "true" ]; then
+            if [ "${{ steps.flags.outputs.dry_run }}" = "true" ]; then
               echo "- No commit or push performed.";
             fi
           } >> "$GITHUB_STEP_SUMMARY"
-
