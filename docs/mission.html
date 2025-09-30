@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AI Center of Excellence</title>
+    <title>Mission - AI Center of Excellence</title>
     <style>
         * {
             margin: 0;
@@ -79,62 +79,62 @@
         }
 
         .container {
-            max-width: 800px;
+            max-width: 900px;
             width: 100%;
             position: relative;
             z-index: 1;
         }
 
-        h1 {
-            font-size: 4rem;
-            font-weight: 300;
-            letter-spacing: -0.02em;
-            margin-bottom: 1rem;
-            color: #ffffff;
+        .back-link {
+            color: #a8e6cf;
+            text-decoration: none;
+            font-size: 1rem;
+            margin-bottom: 3rem;
+            display: inline-block;
+            transition: all 0.3s ease;
         }
 
-        .tagline {
-            font-size: 1.5rem;
+        .back-link:hover {
+            transform: translateX(-5px);
+        }
+
+        .mission-container {
+            text-align: center;
+        }
+
+        .mission-title {
+            font-size: 1.2rem;
             color: #a8e6cf;
             font-weight: 300;
+            letter-spacing: 0.3em;
+            text-transform: uppercase;
             margin-bottom: 4rem;
         }
 
-        .links {
-            display: flex;
-            gap: 2rem;
-            font-size: 1.1rem;
+        .mission-statement {
+            font-size: 3rem;
+            font-weight: 300;
+            line-height: 1.6;
+            letter-spacing: -0.02em;
+            margin-bottom: 2rem;
         }
 
-        .links a {
-            color: #ffffff;
-            text-decoration: none;
-            border-bottom: 1px solid transparent;
-            transition: all 0.3s ease;
-            display: inline-block;
+        .mission-statement .highlight {
+            color: #ff6b9d;
         }
 
-        .links a:hover {
-            border-bottom-color: #ffffff;
-            transform: scale(1.05);
-        }
-
-        .links a:active {
-            transform: scale(1.15);
+        .mission-statement .emphasis {
+            font-weight: 400;
         }
 
         @media (max-width: 768px) {
-            h1 {
-                font-size: 2.5rem;
+            .mission-statement {
+                font-size: 2rem;
             }
 
-            .tagline {
-                font-size: 1.2rem;
-            }
-
-            .links {
-                flex-direction: column;
-                gap: 1rem;
+            .mission-title {
+                font-size: 1rem;
+                letter-spacing: 0.2em;
             }
         }
     </style>
@@ -144,12 +144,18 @@
     <div class="orb orb2"></div>
     <div class="orb orb3"></div>
     <div class="container">
-        <h1>AI Center of Excellence</h1>
-        <p class="tagline">Transformational AI</p>
-        <div class="links">
-            <a href="mission.html">Mission</a>
-            <a href="https://github.com/aicoe-code">GitHub</a>
-            <a href="mailto:hi@aicoe.io">Contact</a>
+        <a href="index.html" class="back-link">← Back</a>
+        <div class="mission-container">
+            <div class="mission-title">Our Mission</div>
+            <div class="mission-statement">
+                <div style="margin-bottom: 2rem;">
+                    <span class="highlight emphasis">Enterprise AI that works.</span>
+                </div>
+                <div style="font-size: 2rem;">
+                    We cut through the hype to deliver transformations<br>
+                    with <span class="emphasis">proven ROI</span>, not promises.
+                </div>
+            </div>
         </div>
     </div>
 </body>
