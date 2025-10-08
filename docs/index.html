@@ -293,6 +293,35 @@
             font-size: 0.875rem;
         }
 
+        /* Typing Animation */
+        .typing-cursor {
+            display: inline-block;
+            width: 3px;
+            height: 1em;
+            background-color: var(--black);
+            margin-left: 4px;
+            animation: blink 530ms infinite;
+            vertical-align: text-bottom;
+        }
+
+        .hero-subtitle .typing-cursor {
+            background-color: var(--gray-600);
+        }
+
+        @keyframes blink {
+            0%, 49% {
+                opacity: 1;
+            }
+            50%, 100% {
+                opacity: 0;
+            }
+        }
+
+        .typing-text {
+            display: inline-block;
+            min-height: 1.1em;
+        }
+
         /* Responsive */
         @media (max-width: 1024px) {
             .footer-content {
@@ -361,7 +390,7 @@
     <!-- Hero Section -->
     <section class="hero">
         <h1>AI Center of<br>Excellence</h1>
-        <p class="hero-subtitle">Transformational AI implementation. From strategic assessment to production-ready solutions.</p>
+        <p class="hero-subtitle" id="hero-subtitle"></p>
         <div class="cta-buttons">
             <a href="transformation-framework.html" class="btn btn-primary">
                 View Framework
@@ -442,8 +471,93 @@
     </footer>
 
     <script src="https://unpkg.com/lucide@latest"></script>
+    <script src="typing-messages.js"></script>
     <script>
         lucide.createIcons();
+
+        // Typing Animation Engine
+        class TypingAnimation {
+            constructor(elementId, messages, config) {
+                this.element = document.getElementById(elementId);
+                this.messages = messages;
+                this.config = config;
+                this.currentMessageIndex = 0;
+                this.currentCharIndex = 0;
+                this.isDeleting = false;
+                this.isPaused = false;
+
+                // Create cursor element
+                this.cursor = document.createElement('span');
+                this.cursor.className = 'typing-cursor';
+
+                // Create text container
+                this.textContainer = document.createElement('span');
+                this.textContainer.className = 'typing-text';
+
+                this.element.appendChild(this.textContainer);
+                this.element.appendChild(this.cursor);
+            }
+
+            type() {
+                const currentMessage = this.messages[this.currentMessageIndex];
+
+                if (this.isPaused) {
+                    setTimeout(() => {
+                        this.isPaused = false;
+                        this.isDeleting = true;
+                        this.type();
+                    }, this.config.delayBetweenMessages);
+                    return;
+                }
+
+                if (this.isDeleting) {
+                    // Delete characters
+                    if (this.currentCharIndex > 0) {
+                        this.currentCharIndex--;
+                        this.textContainer.textContent = currentMessage.substring(0, this.currentCharIndex);
+                        setTimeout(() => this.type(), this.config.deletingSpeed);
+                    } else {
+                        // Move to next message
+                        this.isDeleting = false;
+                        this.currentMessageIndex = (this.currentMessageIndex + 1) % this.messages.length;
+                        setTimeout(() => this.type(), this.config.typingSpeed);
+                    }
+                } else {
+                    // Type characters
+                    if (this.currentCharIndex < currentMessage.length) {
+                        this.currentCharIndex++;
+                        this.textContainer.textContent = currentMessage.substring(0, this.currentCharIndex);
+                        setTimeout(() => this.type(), this.config.typingSpeed);
+                    } else {
+                        // Finished typing, pause before deleting
+                        this.isPaused = true;
+                        this.type();
+                    }
+                }
+            }
+
+            start(delay = 0) {
+                setTimeout(() => this.type(), delay);
+            }
+        }
+
+        // Initialize typing animations on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            const config = typingMessages.config;
+
+            // Set random hero heading on each page load
+            const heroHeading = document.querySelector('.hero h1');
+            const randomHeading = typingMessages.heroHeading[Math.floor(Math.random() * typingMessages.heroHeading.length)];
+            heroHeading.textContent = randomHeading;
+
+            // Initialize hero subtitle animation only
+            const subtitleAnimation = new TypingAnimation(
+                'hero-subtitle',
+                typingMessages.heroSubtitle,
+                config
+            );
+            subtitleAnimation.start(config.initialDelay);
+        });
     </script>
 </body>
 </html>
