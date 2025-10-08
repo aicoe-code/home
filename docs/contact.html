@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mission - AI Center of Excellence</title>
+    <title>Contact - AI Center of Excellence</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lucide-static@0.16.29/font/lucide.min.css">
     <style>
         :root {
@@ -34,7 +34,6 @@
             overflow-x: hidden;
         }
 
-        /* Navigation */
         nav {
             position: fixed;
             top: 0;
@@ -96,7 +95,7 @@
         /* Page Header */
         .page-header {
             margin-top: 80px;
-            padding: 4rem 3rem 2rem;
+            padding: 4rem 3rem 1rem;
             max-width: 1400px;
             margin-left: auto;
             margin-right: auto;
@@ -116,25 +115,11 @@
             max-width: 800px;
         }
 
-        /* Content Sections */
+        /* Content Section */
         .content-section {
             max-width: 1400px;
             margin: 0 auto;
-            padding: 2rem 3rem 4rem;
-            border-bottom: 1px solid var(--gray-200);
-        }
-
-        .content-section:last-of-type {
-            border-bottom: none;
-        }
-
-        .section-title {
-            font-size: 0.875rem;
-            font-weight: 600;
-            letter-spacing: 0.1em;
-            text-transform: uppercase;
-            color: var(--gray-500);
-            margin-bottom: 3rem;
+            padding: 4rem 3rem;
         }
 
         .grid {
@@ -148,6 +133,7 @@
             border: 1px solid var(--gray-200);
             padding: 2.5rem;
             transition: all 0.3s;
+            text-align: center;
         }
 
         .card:hover {
@@ -163,7 +149,7 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            margin-bottom: 1.5rem;
+            margin: 0 auto 1.5rem;
             font-size: 1.5rem;
         }
 
@@ -178,6 +164,17 @@
             color: var(--gray-600);
             line-height: 1.7;
             margin-bottom: 1.5rem;
+        }
+
+        .card a {
+            color: var(--black);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.2s;
+        }
+
+        .card a:hover {
+            color: var(--gray-600);
         }
 
         /* Footer */
@@ -240,7 +237,6 @@
             font-size: 0.875rem;
         }
 
-        /* Responsive */
         @media (max-width: 1024px) {
             .footer-content {
                 grid-template-columns: 1fr 1fr;
@@ -257,7 +253,7 @@
             }
 
             .page-header {
-                padding: 4rem 1.5rem 1rem;
+                padding: 4rem 1.5rem 2rem;
             }
 
             .page-header h1 {
@@ -269,7 +265,7 @@
             }
 
             .content-section {
-                padding: 2rem 1.5rem 3rem;
+                padding: 3rem 1.5rem;
             }
 
             .grid {
@@ -284,7 +280,6 @@
     </style>
 </head>
 <body>
-    <!-- Navigation -->
     <nav>
         <div class="nav-container">
             <a href="index.html" class="logo">
@@ -303,36 +298,38 @@
 
     <!-- Page Header -->
     <section class="page-header">
-        <h1>Mission</h1>
-        <p>We help you transform AI possibilities into business results. Real transformations with proven ROI, not empty promises.</p>
+        <h1>Contact</h1>
+        <p>Let's discuss your AI transformation</p>
     </section>
 
-    <!-- Content Section -->
+    <!-- Contact Section -->
     <section class="content-section">
-        <h2 class="section-title">What Drives Us</h2>
         <div class="grid">
             <div class="card">
                 <div class="card-icon">
-                    <i data-lucide="users"></i>
+                    <i data-lucide="mail"></i>
                 </div>
-                <h3>How We Help You</h3>
-                <p>We partner with you to implement AI that delivers measurable value. Whether you're starting your AI journey or scaling existing initiatives, we bridge the gap between your business goals and AI capabilities, ensuring every solution creates real impact for your organization.</p>
+                <h3>Email</h3>
+                <p>Get in touch for AI transformation inquiries</p>
+                <a href="mailto:hi@aicoe.io">hi@aicoe.io</a>
             </div>
 
             <div class="card">
                 <div class="card-icon">
-                    <i data-lucide="target"></i>
+                    <i data-lucide="github"></i>
                 </div>
-                <h3>Your Success Is Our Focus</h3>
-                <p>We know too many AI projects fail to deliver. That's why we work alongside you with proven methodologies and practical implementation strategies. Your transformation is built on technical excellence aligned with your business objectives, ensuring sustainable results you can measure and trust.</p>
+                <h3>GitHub</h3>
+                <p>Explore our open-source contributions</p>
+                <a href="https://github.com/aicoe-code" target="_blank">github.com/aicoe-code</a>
             </div>
 
             <div class="card">
                 <div class="card-icon">
-                    <i data-lucide="shield-check"></i>
+                    <i data-lucide="linkedin"></i>
                 </div>
-                <h3>Our Commitment to You</h3>
-                <p>You deserve AI that works in production, not just impressive demos. We're committed to helping you successfully navigate your entire AI journey—from initial strategy through implementation to long-term value realization. Your success is measurable, repeatable, and built to last.</p>
+                <h3>LinkedIn</h3>
+                <p>Connect with our leadership team</p>
+                <a href="https://www.linkedin.com/in/srinivas-karri-86b119/" target="_blank">Srinivas Karri</a>
             </div>
         </div>
     </section>
@@ -348,10 +345,9 @@
                 <h5>Company</h5>
                 <ul class="footer-links">
                     <li><a href="mission.html">Mission</a></li>
-                <li><a href="approach.html">Approach</a></li>
+                    <li><a href="approach.html">Approach</a></li>
                     <li><a href="about.html">About</a></li>
                     <li><a href="transformation-framework.html">Framework</a></li>
-                    <li><a href="design-guidelines.html">Guidelines</a></li>
                 </ul>
             </div>
             <div class="footer-section">
@@ -365,7 +361,7 @@
                 <h5>Connect</h5>
                 <ul class="footer-links">
                     <li><a href="mailto:hi@aicoe.io">Email</a></li>
-                    <li><a href="https://github.com/aicoe-code">GitHub</a></li>
+                    <li><a href="contact.html">Contact</a></li>
                 </ul>
             </div>
         </div>

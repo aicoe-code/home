@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mission - AI Center of Excellence</title>
+    <title>Resources - AI Center of Excellence</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lucide-static@0.16.29/font/lucide.min.css">
     <style>
         :root {
@@ -96,7 +96,7 @@
         /* Page Header */
         .page-header {
             margin-top: 80px;
-            padding: 4rem 3rem 2rem;
+            padding: 4rem 3rem 1rem;
             max-width: 1400px;
             margin-left: auto;
             margin-right: auto;
@@ -122,10 +122,6 @@
             margin: 0 auto;
             padding: 2rem 3rem 4rem;
             border-bottom: 1px solid var(--gray-200);
-        }
-
-        .content-section:last-of-type {
-            border-bottom: none;
         }
 
         .section-title {
@@ -178,6 +174,21 @@
             color: var(--gray-600);
             line-height: 1.7;
             margin-bottom: 1.5rem;
+        }
+
+        .card-link {
+            color: var(--black);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 0.95rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: gap 0.2s;
+        }
+
+        .card-link:hover {
+            gap: 0.75rem;
         }
 
         /* Footer */
@@ -257,7 +268,7 @@
             }
 
             .page-header {
-                padding: 4rem 1.5rem 1rem;
+                padding: 4rem 1.5rem 3rem;
             }
 
             .page-header h1 {
@@ -269,7 +280,7 @@
             }
 
             .content-section {
-                padding: 2rem 1.5rem 3rem;
+                padding: 4rem 1.5rem;
             }
 
             .grid {
@@ -303,36 +314,132 @@
 
     <!-- Page Header -->
     <section class="page-header">
-        <h1>Mission</h1>
-        <p>We help you transform AI possibilities into business results. Real transformations with proven ROI, not empty promises.</p>
+        <h1>Resources</h1>
+        <p>Comprehensive guides, frameworks, and tools to accelerate your AI transformation journey.</p>
     </section>
 
-    <!-- Content Section -->
+    <!-- Frameworks Section -->
     <section class="content-section">
-        <h2 class="section-title">What Drives Us</h2>
+        <h2 class="section-title">Frameworks & Methodologies</h2>
         <div class="grid">
             <div class="card">
                 <div class="card-icon">
-                    <i data-lucide="users"></i>
+                    <i data-lucide="layers"></i>
                 </div>
-                <h3>How We Help You</h3>
-                <p>We partner with you to implement AI that delivers measurable value. Whether you're starting your AI journey or scaling existing initiatives, we bridge the gap between your business goals and AI capabilities, ensuring every solution creates real impact for your organization.</p>
+                <h3>AI Transformation Framework</h3>
+                <p>Strategic methodology for enterprise AI adoption, from readiness assessment to production deployment.</p>
+                <a href="mailto:hi@aicoe.io" class="card-link">
+                    Contact us
+                    <i data-lucide="arrow-right"></i>
+                </a>
             </div>
 
             <div class="card">
                 <div class="card-icon">
                     <i data-lucide="target"></i>
                 </div>
-                <h3>Your Success Is Our Focus</h3>
-                <p>We know too many AI projects fail to deliver. That's why we work alongside you with proven methodologies and practical implementation strategies. Your transformation is built on technical excellence aligned with your business objectives, ensuring sustainable results you can measure and trust.</p>
+                <h3>AI Readiness Assessment</h3>
+                <p>Evaluate your organization's capabilities across technology, data, people, and processes.</p>
+                <a href="mailto:hi@aicoe.io" class="card-link">
+                    Contact us
+                    <i data-lucide="arrow-right"></i>
+                </a>
             </div>
 
             <div class="card">
                 <div class="card-icon">
-                    <i data-lucide="shield-check"></i>
+                    <i data-lucide="git-branch"></i>
                 </div>
-                <h3>Our Commitment to You</h3>
-                <p>You deserve AI that works in production, not just impressive demos. We're committed to helping you successfully navigate your entire AI journey—from initial strategy through implementation to long-term value realization. Your success is measurable, repeatable, and built to last.</p>
+                <h3>Implementation Roadmap</h3>
+                <p>Phased approach to AI implementation with clear milestones and success criteria.</p>
+                <a href="mailto:hi@aicoe.io" class="card-link">
+                    Contact us
+                    <i data-lucide="arrow-right"></i>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Tools & Code Section -->
+    <section class="content-section">
+        <h2 class="section-title">Tools & Code</h2>
+        <div class="grid">
+            <div class="card">
+                <div class="card-icon">
+                    <i data-lucide="github"></i>
+                </div>
+                <h3>Open Source Projects</h3>
+                <p>Production-ready code repositories, reference implementations, and reusable components.</p>
+                <a href="https://github.com/aicoe-code" class="card-link">
+                    View on GitHub
+                    <i data-lucide="arrow-right"></i>
+                </a>
+            </div>
+
+            <div class="card">
+                <div class="card-icon">
+                    <i data-lucide="package"></i>
+                </div>
+                <h3>AI Architecture Patterns</h3>
+                <p>Proven architectural patterns for scalable, secure, and maintainable AI systems.</p>
+                <a href="mailto:hi@aicoe.io" class="card-link">
+                    Contact us
+                    <i data-lucide="arrow-right"></i>
+                </a>
+            </div>
+
+            <div class="card">
+                <div class="card-icon">
+                    <i data-lucide="code"></i>
+                </div>
+                <h3>Code Templates</h3>
+                <p>Starter templates and boilerplates for common AI implementation scenarios.</p>
+                <a href="mailto:hi@aicoe.io" class="card-link">
+                    Contact us
+                    <i data-lucide="arrow-right"></i>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Documentation Section -->
+    <section class="content-section">
+        <h2 class="section-title">Documentation & Guides</h2>
+        <div class="grid">
+            <div class="card">
+                <div class="card-icon">
+                    <i data-lucide="book-open"></i>
+                </div>
+                <h3>Best Practices Guide</h3>
+                <p>Comprehensive documentation covering AI development, deployment, and operations best practices.</p>
+                <a href="mailto:hi@aicoe.io" class="card-link">
+                    Contact us
+                    <i data-lucide="arrow-right"></i>
+                </a>
+            </div>
+
+            <div class="card">
+                <div class="card-icon">
+                    <i data-lucide="file-text"></i>
+                </div>
+                <h3>Case Studies</h3>
+                <p>Real-world AI transformation stories with measurable results and lessons learned.</p>
+                <a href="mailto:hi@aicoe.io" class="card-link">
+                    Contact us
+                    <i data-lucide="arrow-right"></i>
+                </a>
+            </div>
+
+            <div class="card">
+                <div class="card-icon">
+                    <i data-lucide="bookmark"></i>
+                </div>
+                <h3>Technical Documentation</h3>
+                <p>In-depth technical guides for AI implementation, MLOps, and system architecture.</p>
+                <a href="mailto:hi@aicoe.io" class="card-link">
+                    Contact us
+                    <i data-lucide="arrow-right"></i>
+                </a>
             </div>
         </div>
     </section>
@@ -350,15 +457,15 @@
                     <li><a href="mission.html">Mission</a></li>
                 <li><a href="approach.html">Approach</a></li>
                     <li><a href="about.html">About</a></li>
-                    <li><a href="transformation-framework.html">Framework</a></li>
-                    <li><a href="design-guidelines.html">Guidelines</a></li>
+                    <li><a href="resources.html">Resources</a></li>
                 </ul>
             </div>
             <div class="footer-section">
                 <h5>Resources</h5>
                 <ul class="footer-links">
-                    <li><a href="resources.html">Resources</a></li>
                     <li><a href="https://github.com/aicoe-code">GitHub</a></li>
+                    <li><a href="#">Documentation</a></li>
+                    <li><a href="#">Case Studies</a></li>
                 </ul>
             </div>
             <div class="footer-section">

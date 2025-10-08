@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mission - AI Center of Excellence</title>
+    <title>Transformation Framework - AI Center of Excellence</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lucide-static@0.16.29/font/lucide.min.css">
     <style>
         :root {
@@ -18,6 +18,11 @@
             --gray-700: #404040;
             --gray-800: #262626;
             --gray-900: #171717;
+
+            /* Section color accents */
+            --color-process: #0066CC;
+            --color-deliverables: #10B981;
+            --color-why: #8B5CF6;
         }
 
         * {
@@ -96,7 +101,7 @@
         /* Page Header */
         .page-header {
             margin-top: 80px;
-            padding: 4rem 3rem 2rem;
+            padding: 4rem 3rem 1rem;
             max-width: 1400px;
             margin-left: auto;
             margin-right: auto;
@@ -135,6 +140,40 @@
             text-transform: uppercase;
             color: var(--gray-500);
             margin-bottom: 3rem;
+            padding-bottom: 0.75rem;
+            border-bottom: 3px solid var(--gray-200);
+        }
+
+        /* Section-specific color accents */
+        .section-process .section-title {
+            border-bottom-color: var(--color-process);
+            color: var(--color-process);
+        }
+
+        .section-deliverables .section-title {
+            border-bottom-color: var(--color-deliverables);
+            color: var(--color-deliverables);
+        }
+
+        .section-why .section-title {
+            border-bottom-color: var(--color-why);
+            color: var(--color-why);
+        }
+
+        .section-process .card-icon {
+            background: var(--color-process);
+        }
+
+        .section-deliverables .card-icon {
+            background: var(--color-deliverables);
+        }
+
+        .section-why .card-icon {
+            background: var(--color-why);
+        }
+
+        .section-process .step-number {
+            color: var(--color-process);
         }
 
         .grid {
@@ -177,7 +216,13 @@
         .card p {
             color: var(--gray-600);
             line-height: 1.7;
-            margin-bottom: 1.5rem;
+        }
+
+        .card .step-number {
+            font-size: 0.875rem;
+            font-weight: 600;
+            color: var(--gray-500);
+            margin-bottom: 0.5rem;
         }
 
         /* Footer */
@@ -303,36 +348,174 @@
 
     <!-- Page Header -->
     <section class="page-header">
-        <h1>Mission</h1>
-        <p>We help you transform AI possibilities into business results. Real transformations with proven ROI, not empty promises.</p>
+        <h1>Transformation Framework</h1>
+        <p>We help you see it before you build it. Rapid prototyping and validation to turn AI possibilities into measurable business outcomes.</p>
     </section>
 
-    <!-- Content Section -->
-    <section class="content-section">
-        <h2 class="section-title">What Drives Us</h2>
+    <!-- The Process Section -->
+    <section class="content-section section-process">
+        <h2 class="section-title">6-Step Engagement Process</h2>
+        <div class="grid">
+            <div class="card">
+                <div class="step-number">STEP 1</div>
+                <div class="card-icon">
+                    <i data-lucide="compass"></i>
+                </div>
+                <h3>Discovery</h3>
+                <p>1-hour session to understand your use case, business objectives, and success criteria. We identify the core problem and explore transformational opportunities beyond incremental improvements.</p>
+            </div>
+
+            <div class="card">
+                <div class="step-number">STEP 2</div>
+                <div class="card-icon">
+                    <i data-lucide="zap"></i>
+                </div>
+                <h3>Prototype</h3>
+                <p>Build a working, high-fidelity demonstration in days leveraging proven design patterns from our knowledge base. You'll experience the AI solution firsthand, seeing both capabilities and limitations.</p>
+            </div>
+
+            <div class="card">
+                <div class="step-number">STEP 3</div>
+                <div class="card-icon">
+                    <i data-lucide="check-circle"></i>
+                </div>
+                <h3>Define Evals</h3>
+                <p>Establish clear, prototype-based evaluation criteria. With a working model in hand, success metrics become concrete and testable rather than abstract concepts.</p>
+            </div>
+
+            <div class="card">
+                <div class="step-number">STEP 4</div>
+                <div class="card-icon">
+                    <i data-lucide="refresh-cw"></i>
+                </div>
+                <h3>Iterate</h3>
+                <p>Three 30-minute feedback sessions where you interact with the prototype. Sessions are AI-analyzed to rapidly identify refinements and improvements, accelerating the iteration cycle.</p>
+            </div>
+
+            <div class="card">
+                <div class="step-number">STEP 5</div>
+                <div class="card-icon">
+                    <i data-lucide="box"></i>
+                </div>
+                <h3>Architect</h3>
+                <p>Develop comprehensive functional, technical, and architectural specifications ready for enterprise implementation. Solutions work with any major hyperscaler platform.</p>
+            </div>
+
+            <div class="card">
+                <div class="step-number">STEP 6</div>
+                <div class="card-icon">
+                    <i data-lucide="trending-up"></i>
+                </div>
+                <h3>Commercialize</h3>
+                <p>Create a detailed business case with clear ROI projections. We target 4-10X return on investment or identify early when to pivot, ensuring you fail fast and learn quickly.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- What You Get Section -->
+    <section class="content-section section-deliverables">
+        <h2 class="section-title">What You Get</h2>
         <div class="grid">
             <div class="card">
                 <div class="card-icon">
-                    <i data-lucide="users"></i>
+                    <i data-lucide="cpu"></i>
                 </div>
-                <h3>How We Help You</h3>
-                <p>We partner with you to implement AI that delivers measurable value. Whether you're starting your AI journey or scaling existing initiatives, we bridge the gap between your business goals and AI capabilities, ensuring every solution creates real impact for your organization.</p>
+                <h3>Interactive Prototype</h3>
+                <p>A high-fidelity demonstration you can experience, test, and share with stakeholders. See AI in action in your specific context.</p>
+            </div>
+
+            <div class="card">
+                <div class="card-icon">
+                    <i data-lucide="eye"></i>
+                </div>
+                <h3>Realistic Understanding</h3>
+                <p>Clear visibility into AI capabilities AND limitations for your specific use case. No more PowerPoint promises—see what actually works.</p>
+            </div>
+
+            <div class="card">
+                <div class="card-icon">
+                    <i data-lucide="clipboard-check"></i>
+                </div>
+                <h3>Validated Evaluation Criteria</h3>
+                <p>Concrete, testable success metrics that everyone understands. Know exactly what "good" looks like and how to measure it.</p>
+            </div>
+
+            <div class="card">
+                <div class="card-icon">
+                    <i data-lucide="bar-chart-3"></i>
+                </div>
+                <h3>Business Case Validation</h3>
+                <p>Confirmed 4-10X ROI potential or early insights to pivot strategy. Make informed decisions with validated financial projections.</p>
+            </div>
+
+            <div class="card">
+                <div class="card-icon">
+                    <i data-lucide="file-text"></i>
+                </div>
+                <h3>Implementation-Ready Specs</h3>
+                <p>Complete functional, technical, and architectural documentation. Everything your team needs to move to production with confidence.</p>
+            </div>
+
+            <div class="card">
+                <div class="card-icon">
+                    <i data-lucide="cloud"></i>
+                </div>
+                <h3>Multi-Cloud Flexibility</h3>
+                <p>Solutions designed to work with AWS, Azure, GCP, or Oracle Cloud. No platform lock-in, just the best fit for your infrastructure.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Why This Works Section -->
+    <section class="content-section section-why">
+        <h2 class="section-title">Why This Approach Works</h2>
+        <div class="grid">
+            <div class="card">
+                <div class="card-icon">
+                    <i data-lucide="gauge"></i>
+                </div>
+                <h3>Speed Without Sacrifice</h3>
+                <p>Our extensive design pattern library and hyperscaler service catalogue enable rapid development without compromising quality or feasibility.</p>
+            </div>
+
+            <div class="card">
+                <div class="card-icon">
+                    <i data-lucide="dollar-sign"></i>
+                </div>
+                <h3>Cost-Effective Validation</h3>
+                <p>Validate AI investments in days with minimal cost before committing to large-scale implementations. De-risk your initiatives early.</p>
+            </div>
+
+            <div class="card">
+                <div class="card-icon">
+                    <i data-lucide="sparkles"></i>
+                </div>
+                <h3>AI-Accelerated Everything</h3>
+                <p>We practice what we preach—using AI to build AI solutions faster, analyze feedback more effectively, and iterate more intelligently.</p>
             </div>
 
             <div class="card">
                 <div class="card-icon">
                     <i data-lucide="target"></i>
                 </div>
-                <h3>Your Success Is Our Focus</h3>
-                <p>We know too many AI projects fail to deliver. That's why we work alongside you with proven methodologies and practical implementation strategies. Your transformation is built on technical excellence aligned with your business objectives, ensuring sustainable results you can measure and trust.</p>
+                <h3>Business-Outcome Focused</h3>
+                <p>Technology serves business goals, not the other way around. Every prototype is built with ROI and operational delivery in mind.</p>
             </div>
 
             <div class="card">
                 <div class="card-icon">
-                    <i data-lucide="shield-check"></i>
+                    <i data-lucide="briefcase"></i>
                 </div>
-                <h3>Our Commitment to You</h3>
-                <p>You deserve AI that works in production, not just impressive demos. We're committed to helping you successfully navigate your entire AI journey—from initial strategy through implementation to long-term value realization. Your success is measurable, repeatable, and built to last.</p>
+                <h3>Enterprise Experience</h3>
+                <p>Decades of experience with enterprise architecture, Oracle technologies, and large-scale transformation initiatives inform every engagement.</p>
+            </div>
+
+            <div class="card">
+                <div class="card-icon">
+                    <i data-lucide="shield"></i>
+                </div>
+                <h3>Independent Guidance</h3>
+                <p>Technology-agnostic advisory focused on your success, with no vendor bias or platform lock-in. Recommendations based on your needs.</p>
             </div>
         </div>
     </section>
@@ -348,10 +531,9 @@
                 <h5>Company</h5>
                 <ul class="footer-links">
                     <li><a href="mission.html">Mission</a></li>
-                <li><a href="approach.html">Approach</a></li>
+                    <li><a href="approach.html">Approach</a></li>
                     <li><a href="about.html">About</a></li>
                     <li><a href="transformation-framework.html">Framework</a></li>
-                    <li><a href="design-guidelines.html">Guidelines</a></li>
                 </ul>
             </div>
             <div class="footer-section">

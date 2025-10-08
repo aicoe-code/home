@@ -1,3 +1,6 @@
 Private/*
 !Private/00-Public_site/
 !Private/00-Public_site/**
+docs/design
+docs/templates
+docs/resources
