@@ -5,3 +5,7 @@ docs/design
 docs/templates
 docs/resources
 docs/roadmap
+
+# macOS system files
+.DS_Store
+*.DS_Store
