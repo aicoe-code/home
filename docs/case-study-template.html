@@ -1,0 +1,799 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>[COMPANY/PROJECT NAME] - Case Study - AI Center of Excellence</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lucide-static@0.16.29/font/lucide.min.css">
+    <style>
+        :root {
+            --black: #000000;
+            --white: #FFFFFF;
+            --gray-100: #F5F5F5;
+            --gray-200: #E5E5E5;
+            --gray-300: #D4D4D4;
+            --gray-400: #A3A3A3;
+            --gray-500: #737373;
+            --gray-600: #525252;
+            --gray-700: #404040;
+            --gray-800: #262626;
+            --gray-900: #171717;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Inter', sans-serif;
+            line-height: 1.6;
+            color: var(--gray-900);
+            background: var(--white);
+            overflow-x: hidden;
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: var(--white);
+            border-bottom: 1px solid var(--gray-200);
+            z-index: 1000;
+        }
+
+        .nav-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.5rem 3rem;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            text-decoration: none;
+        }
+
+        .logo img {
+            height: 50px;
+            width: auto;
+            display: block;
+        }
+
+        .logo-text {
+            font-size: 1.25rem;
+            font-weight: 600;
+            letter-spacing: -0.02em;
+            color: var(--black);
+            line-height: 1;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 3rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--gray-700);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.2s;
+        }
+
+        .nav-links a:hover {
+            color: var(--black);
+        }
+
+        /* Page Header */
+        .page-header {
+            margin-top: 85px;
+            padding: 6rem 3rem 4rem;
+            background: var(--white);
+            border-bottom: 1px solid var(--gray-200);
+        }
+
+        .page-header-content {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--gray-600);
+            text-decoration: none;
+            font-size: 0.875rem;
+            margin-bottom: 2rem;
+            transition: color 0.2s;
+        }
+
+        .back-link:hover {
+            color: var(--black);
+        }
+
+        .case-study-meta {
+            display: flex;
+            gap: 2rem;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .meta-item {
+            display: flex;
+            flex-direction: column;
+            gap: 0.25rem;
+        }
+
+        .meta-label {
+            font-size: 0.75rem;
+            font-weight: 600;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: var(--gray-500);
+        }
+
+        .meta-value {
+            font-size: 0.875rem;
+            color: var(--gray-900);
+            font-weight: 500;
+        }
+
+        .page-header h1 {
+            font-size: 3.5rem;
+            font-weight: 300;
+            letter-spacing: -0.03em;
+            line-height: 1.1;
+            margin-bottom: 1.5rem;
+            color: var(--black);
+        }
+
+        .page-header .subtitle {
+            font-size: 1.25rem;
+            color: var(--gray-600);
+            font-weight: 400;
+            max-width: 800px;
+        }
+
+        /* Content Section */
+        .content-section {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 6rem 3rem;
+            border-top: 1px solid var(--gray-200);
+        }
+
+        .content-section:first-of-type {
+            border-top: none;
+        }
+
+        .section-title {
+            font-size: 0.875rem;
+            font-weight: 600;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: var(--gray-500);
+            margin-bottom: 3rem;
+        }
+
+        /* Grid Layout */
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 3rem;
+        }
+
+        .grid-2 {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 3rem;
+        }
+
+        /* Cards */
+        .card {
+            background: var(--white);
+            border: 1px solid var(--gray-200);
+            padding: 2.5rem;
+            transition: all 0.3s;
+        }
+
+        .card:hover {
+            border-color: var(--black);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+        }
+
+        .card-icon {
+            width: 48px;
+            height: 48px;
+            background: var(--black);
+            color: var(--white);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1.5rem;
+            font-size: 1.5rem;
+        }
+
+        .card h3 {
+            font-size: 1.5rem;
+            font-weight: 500;
+            margin-bottom: 1rem;
+            color: var(--black);
+        }
+
+        .card p {
+            color: var(--gray-600);
+            line-height: 1.7;
+            margin-bottom: 1rem;
+        }
+
+        .card p:last-child {
+            margin-bottom: 0;
+        }
+
+        .card ul {
+            list-style: none;
+            padding: 0;
+            margin-top: 1rem;
+        }
+
+        .card li {
+            color: var(--gray-600);
+            line-height: 1.7;
+            margin-bottom: 0.75rem;
+            padding-left: 1.5rem;
+            position: relative;
+        }
+
+        .card li:before {
+            content: "•";
+            position: absolute;
+            left: 0;
+            color: var(--black);
+            font-weight: bold;
+        }
+
+        /* Results/Metrics Section */
+        .metrics-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .metric-card {
+            background: var(--white);
+            border: 1px solid var(--gray-200);
+            padding: 2rem;
+            text-align: center;
+        }
+
+        .metric-value {
+            font-size: 3rem;
+            font-weight: 300;
+            letter-spacing: -0.03em;
+            color: var(--black);
+            margin-bottom: 0.5rem;
+        }
+
+        .metric-label {
+            font-size: 0.875rem;
+            color: var(--gray-600);
+            font-weight: 500;
+        }
+
+        /* Quote Section */
+        .quote-section {
+            background: var(--gray-100);
+            padding: 3rem;
+            margin: 3rem 0;
+            border-left: 4px solid var(--black);
+        }
+
+        .quote-text {
+            font-size: 1.5rem;
+            font-weight: 300;
+            line-height: 1.6;
+            color: var(--gray-900);
+            font-style: italic;
+            margin-bottom: 1.5rem;
+        }
+
+        .quote-attribution {
+            font-size: 1rem;
+            color: var(--gray-600);
+            font-weight: 500;
+        }
+
+        .quote-attribution .title {
+            color: var(--gray-500);
+            font-weight: 400;
+        }
+
+        /* Content Block */
+        .content-block {
+            max-width: 800px;
+        }
+
+        .content-block h2 {
+            font-size: 2rem;
+            font-weight: 400;
+            margin-bottom: 1.5rem;
+            color: var(--black);
+        }
+
+        .content-block p {
+            color: var(--gray-600);
+            line-height: 1.8;
+            margin-bottom: 1.5rem;
+            font-size: 1.05rem;
+        }
+
+        .content-block ul {
+            list-style: none;
+            padding: 0;
+            margin-bottom: 1.5rem;
+        }
+
+        .content-block li {
+            color: var(--gray-600);
+            line-height: 1.8;
+            margin-bottom: 1rem;
+            padding-left: 2rem;
+            position: relative;
+            font-size: 1.05rem;
+        }
+
+        .content-block li:before {
+            content: "→";
+            position: absolute;
+            left: 0;
+            color: var(--black);
+            font-weight: bold;
+        }
+
+        /* Technologies */
+        .tech-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+
+        .tech-tag {
+            padding: 0.5rem 1rem;
+            background: var(--white);
+            border: 1px solid var(--gray-300);
+            font-size: 0.875rem;
+            color: var(--gray-700);
+            font-weight: 500;
+        }
+
+        /* Footer */
+        footer {
+            border-top: 1px solid var(--gray-200);
+            padding: 4rem 3rem;
+            background: var(--white);
+        }
+
+        .footer-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr;
+            gap: 4rem;
+        }
+
+        .footer-section h5 {
+            font-size: 0.875rem;
+            font-weight: 600;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            margin-bottom: 1.5rem;
+            color: var(--black);
+        }
+
+        .footer-section p {
+            color: var(--gray-600);
+            line-height: 1.7;
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 0.75rem;
+        }
+
+        .footer-links a {
+            color: var(--gray-600);
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+
+        .footer-links a:hover {
+            color: var(--black);
+        }
+
+        .footer-bottom {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding-top: 2rem;
+            margin-top: 2rem;
+            border-top: 1px solid var(--gray-200);
+            color: var(--gray-500);
+            font-size: 0.875rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .footer-content {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .grid-2 {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .nav-container {
+                padding: 1.25rem 1.5rem;
+            }
+
+            .nav-links {
+                gap: 1.5rem;
+            }
+
+            .page-header {
+                padding: 4rem 1.5rem 2rem;
+            }
+
+            .page-header h1 {
+                font-size: 2.5rem;
+            }
+
+            .page-header .subtitle {
+                font-size: 1.1rem;
+            }
+
+            .content-section {
+                padding: 3rem 1.5rem;
+            }
+
+            .grid {
+                grid-template-columns: 1fr;
+            }
+
+            .grid-2 {
+                grid-template-columns: 1fr;
+            }
+
+            .metrics-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .quote-section {
+                padding: 2rem 1.5rem;
+            }
+
+            .quote-text {
+                font-size: 1.25rem;
+            }
+
+            .footer-content {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav>
+        <div class="nav-container">
+            <a href="index.html" class="logo">
+                <img src="icons/logo.png" alt="AI Center of Excellence">
+                <span class="logo-text">AI Center of Excellence</span>
+            </a>
+            <ul class="nav-links">
+                <li><a href="mission.html">Mission</a></li>
+                <li><a href="approach.html">Approach</a></li>
+                <li><a href="resources.html">Resources</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Page Header -->
+    <section class="page-header">
+        <div class="page-header-content">
+            <a href="case-studies.html" class="back-link">
+                <i data-lucide="arrow-left"></i>
+                Back to Case Studies
+            </a>
+
+            <!-- INSTRUCTIONS: Update these meta fields with project-specific information -->
+            <div class="case-study-meta">
+                <div class="meta-item">
+                    <span class="meta-label">Industry</span>
+                    <span class="meta-value">[Healthcare / Manufacturing / Financial Services / etc.]</span>
+                </div>
+                <div class="meta-item">
+                    <span class="meta-label">Company Size</span>
+                    <span class="meta-value">[Enterprise / Mid-Market / Startup]</span>
+                </div>
+                <div class="meta-item">
+                    <span class="meta-label">Timeline</span>
+                    <span class="meta-value">[X weeks / Y months]</span>
+                </div>
+                <div class="meta-item">
+                    <span class="meta-label">ROI</span>
+                    <span class="meta-value">[X]X ROI</span>
+                </div>
+            </div>
+
+            <!-- INSTRUCTIONS: Replace with compelling case study title and subtitle -->
+            <h1>[Company Name or Project Title]: [Brief Value Statement]</h1>
+            <p class="subtitle">[One-sentence summary of transformation: what changed and key outcome]</p>
+        </div>
+    </section>
+
+    <!-- Overview Section -->
+    <section class="content-section">
+        <h2 class="section-title">Overview</h2>
+        <div class="content-block">
+            <!-- INSTRUCTIONS: Provide context - who is the client, what industry, what was their situation -->
+            <p>[2-3 paragraphs describing the client, their business context, and why they engaged with AICoE. Include details about their industry position, scale of operations, and strategic goals.]</p>
+        </div>
+    </section>
+
+    <!-- Challenge Section -->
+    <section class="content-section">
+        <h2 class="section-title">The Challenge</h2>
+        <div class="grid">
+            <!-- INSTRUCTIONS: Add 2-4 cards describing specific challenges. Update icons from lucide.dev -->
+            <div class="card">
+                <div class="card-icon">
+                    <i data-lucide="alert-circle"></i>
+                </div>
+                <h3>[Challenge Title #1]</h3>
+                <p>[Describe the first major challenge or pain point the organization was facing. Be specific about the business impact.]</p>
+            </div>
+
+            <div class="card">
+                <div class="card-icon">
+                    <i data-lucide="trending-down"></i>
+                </div>
+                <h3>[Challenge Title #2]</h3>
+                <p>[Describe the second major challenge. Include metrics if available (e.g., "Processing times of 48+ hours" or "Manual review of 10,000+ documents monthly")]</p>
+            </div>
+
+            <div class="card">
+                <div class="card-icon">
+                    <i data-lucide="x-circle"></i>
+                </div>
+                <h3>[Challenge Title #3]</h3>
+                <p>[Third challenge or pain point. Focus on business impact rather than just technical issues.]</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Solution Section -->
+    <section class="content-section">
+        <h2 class="section-title">Our Approach</h2>
+        <div class="content-block">
+            <!-- INSTRUCTIONS: Describe the solution approach and implementation -->
+            <h2>[Solution Name or Approach Title]</h2>
+            <p>[Describe the overall solution strategy. What approach did AICoE take? What made it unique or effective?]</p>
+
+            <p><strong>Key Components:</strong></p>
+            <ul>
+                <!-- INSTRUCTIONS: List 4-6 key components of the solution -->
+                <li>[Solution component #1 - e.g., "Custom NLP pipeline for document classification"]</li>
+                <li>[Solution component #2 - e.g., "Real-time dashboard for monitoring AI predictions"]</li>
+                <li>[Solution component #3 - e.g., "Automated retraining pipeline with human-in-the-loop validation"]</li>
+                <li>[Solution component #4]</li>
+                <li>[Solution component #5]</li>
+            </ul>
+
+            <!-- INSTRUCTIONS: Add technologies used -->
+            <div class="tech-tags">
+                <span class="tech-tag">[Technology 1 - e.g., Python]</span>
+                <span class="tech-tag">[Technology 2 - e.g., TensorFlow]</span>
+                <span class="tech-tag">[Technology 3 - e.g., AWS]</span>
+                <span class="tech-tag">[Technology 4 - e.g., Docker]</span>
+                <span class="tech-tag">[Add more as needed]</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Implementation Section -->
+    <section class="content-section">
+        <h2 class="section-title">Implementation Journey</h2>
+        <div class="grid">
+            <!-- INSTRUCTIONS: Describe 3-4 phases of implementation -->
+            <div class="card">
+                <div class="card-icon">
+                    <i data-lucide="search"></i>
+                </div>
+                <h3>Phase 1: [Phase Name]</h3>
+                <p>[Describe what happened in this phase. Example: "Discovery & Assessment - Analyzed existing data infrastructure, interviewed key stakeholders, and identified quick wins"]</p>
+            </div>
+
+            <div class="card">
+                <div class="card-icon">
+                    <i data-lucide="code"></i>
+                </div>
+                <h3>Phase 2: [Phase Name]</h3>
+                <p>[Second phase description. Example: "Rapid Prototyping - Built working prototype in 2 weeks, demonstrated 80% accuracy on test dataset"]</p>
+            </div>
+
+            <div class="card">
+                <div class="card-icon">
+                    <i data-lucide="rocket"></i>
+                </div>
+                <h3>Phase 3: [Phase Name]</h3>
+                <p>[Third phase description. Example: "Production Deployment - Scaled to handle 100K requests/day, integrated with existing enterprise systems"]</p>
+            </div>
+
+            <div class="card">
+                <div class="card-icon">
+                    <i data-lucide="trending-up"></i>
+                </div>
+                <h3>Phase 4: [Phase Name]</h3>
+                <p>[Fourth phase description. Example: "Optimization & Scale - Reduced latency by 60%, expanded to 3 additional use cases"]</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Results Section - KEY SECTION -->
+    <section class="content-section">
+        <h2 class="section-title">Measurable Results</h2>
+
+        <!-- INSTRUCTIONS: Update these metrics with actual results. These are the most important! -->
+        <div class="metrics-grid">
+            <div class="metric-card">
+                <div class="metric-value">[#]X</div>
+                <div class="metric-label">[Return on Investment / Revenue Increase / etc.]</div>
+            </div>
+            <div class="metric-card">
+                <div class="metric-value">[#]%</div>
+                <div class="metric-label">[Efficiency Improvement / Cost Reduction / etc.]</div>
+            </div>
+            <div class="metric-card">
+                <div class="metric-value">[#]hrs</div>
+                <div class="metric-label">[Time Saved / Processing Speed / etc.]</div>
+            </div>
+            <div class="metric-card">
+                <div class="metric-value">[#]%</div>
+                <div class="metric-label">[Accuracy / Quality Improvement / etc.]</div>
+            </div>
+        </div>
+
+        <!-- Additional Results Details -->
+        <div class="grid" style="margin-top: 3rem;">
+            <div class="card">
+                <div class="card-icon">
+                    <i data-lucide="dollar-sign"></i>
+                </div>
+                <h3>Business Impact</h3>
+                <p>[Describe the business value created. Be specific about revenue impact, cost savings, or strategic advantages gained.]</p>
+            </div>
+
+            <div class="card">
+                <div class="card-icon">
+                    <i data-lucide="users"></i>
+                </div>
+                <h3>Operational Impact</h3>
+                <p>[Describe how day-to-day operations changed. How many people were affected? What processes improved?]</p>
+            </div>
+
+            <div class="card">
+                <div class="card-icon">
+                    <i data-lucide="zap"></i>
+                </div>
+                <h3>Strategic Impact</h3>
+                <p>[Describe longer-term strategic benefits. New capabilities unlocked? Competitive advantages gained?]</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Quote Section (Optional but Recommended) -->
+    <section class="content-section">
+        <!-- INSTRUCTIONS: If you have a client testimonial, add it here. Otherwise, remove this section. -->
+        <div class="quote-section">
+            <p class="quote-text">"[Client testimonial quote about the transformation, results, or experience working with AICoE. Keep it authentic and specific.]"</p>
+            <p class="quote-attribution">
+                <strong>[Name]</strong>, <span class="title">[Title] at [Company]</span>
+            </p>
+        </div>
+    </section>
+
+    <!-- Key Takeaways Section -->
+    <section class="content-section">
+        <h2 class="section-title">Key Takeaways</h2>
+        <div class="grid-2">
+            <div class="card">
+                <div class="card-icon">
+                    <i data-lucide="lightbulb"></i>
+                </div>
+                <h3>What Worked</h3>
+                <ul>
+                    <!-- INSTRUCTIONS: List 3-5 success factors -->
+                    <li>[Success factor #1 - e.g., "Starting with a focused pilot reduced risk and proved value quickly"]</li>
+                    <li>[Success factor #2]</li>
+                    <li>[Success factor #3]</li>
+                    <li>[Success factor #4]</li>
+                </ul>
+            </div>
+
+            <div class="card">
+                <div class="card-icon">
+                    <i data-lucide="book-open"></i>
+                </div>
+                <h3>Lessons Learned</h3>
+                <ul>
+                    <!-- INSTRUCTIONS: List 3-5 lessons or insights gained -->
+                    <li>[Lesson #1 - e.g., "Data quality was more important than model complexity"]</li>
+                    <li>[Lesson #2]</li>
+                    <li>[Lesson #3]</li>
+                    <li>[Lesson #4]</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h5>AI Center of Excellence</h5>
+                <p>Transforming organizations through strategic AI implementation and innovation.</p>
+            </div>
+            <div class="footer-section">
+                <h5>Company</h5>
+                <ul class="footer-links">
+                    <li><a href="mission.html">Mission</a></li>
+                    <li><a href="approach.html">Approach</a></li>
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h5>Resources</h5>
+                <ul class="footer-links">
+                    <li><a href="transformation-framework.html">Transformation Framework</a></li>
+                    <li><a href="case-studies.html">Case Studies</a></li>
+                    <li><a href="best-practices.html">Best Practices</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h5>Connect</h5>
+                <ul class="footer-links">
+                    <li><a href="https://github.com/aicoe-code">GitHub</a></li>
+                    <li><a href="mailto:hi@aicoe.io">Email</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2024 AI Center of Excellence. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <script>
+        lucide.createIcons();
+    </script>
+</body>
+</html>
